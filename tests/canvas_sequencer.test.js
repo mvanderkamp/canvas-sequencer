@@ -110,11 +110,11 @@ describe('CanvasSequencer', () => {
     const ctx = {};
     ctx.arc = jest.fn();
     ctx.lineJoin = 'round';
-    ctx.save = jest.fn();
     ctx.strokeStyle = 'red';
+    ctx.save = jest.fn();
+    ctx.restore = jest.fn();
     cs.arc(0,1,2,3,Math.PI);
     cs.lineJoin = 'bevel';
-    cs.save();
     cs.strokeStyle = 'blue';
     cs.strokeStyle = 'green';
 
@@ -122,8 +122,6 @@ describe('CanvasSequencer', () => {
       expect(() => cs.execute(ctx)).not.toThrow();
       expect(ctx.arc).toHaveBeenCalledTimes(1);
       expect(ctx.arc).toHaveBeenCalledWith(0,1,2,3,Math.PI);
-      expect(ctx.save).toHaveBeenCalledTimes(1);
-      expect(ctx.save).toHaveBeenCalledWith();
       expect(ctx.lineJoin).toBe('bevel');
       expect(ctx.strokeStyle).toBe('green');
     });
