@@ -127,7 +127,37 @@ describe('CanvasSequencer', () => {
       expect(ctx.lineJoin).toBe('bevel');
       expect(ctx.strokeStyle).toBe('green');
     });
+  });
 
+  describe('toJSON()', () => {
+    const cs = new CanvasSequencer();
+    cs.fillStyle = 'blue';
+    cs.fillRect(5,6,7,8);
+
+    test('Produces a JSON parsable string', () => {
+      const str = cs.toJSON();
+      expect(typeof str).toBe('string');
+      expect(() => JSON.parse(str)).not.toThrow();
+      const obj = JSON.parse(str);
+      expect(typeof obj).toBe('object');
+    });
+  });
+
+  describe('.fromString(str)', () => {
+    const cs = new CanvasSequencer();
+    cs.fillStyle = 'blue';
+    cs.fillRect(5,6,7,8);
+    const str = cs.toJSON();
+    
+    test('Produces a CanvasSequencer object', () => {
+      const seq = CanvasSequencer.fromString(str);
+      expect(seq).toBeInstanceOf(CanvasSequencer);
+    });
+
+    test('Reproduces the original sequence', () => {
+      const seq = CanvasSequencer.fromString(str);
+      expect(seq).toEqual(cs);
+    });
   });
 });
 
