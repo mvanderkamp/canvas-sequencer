@@ -36,5 +36,8 @@
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "devDependencies": {
     "jest": "^23.4.2"
+  },
+  "jest": {
+    "testURL": "http://localhost/"
   }
 }

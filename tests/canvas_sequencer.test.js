@@ -4,7 +4,7 @@
 
 'use strict';
 
-const lib = require('../libs/canvas_sequencer.js');
+const lib = require('../src/canvas_sequencer.js');
 const CanvasSequencer = lib.CanvasSequencer;
 const CanvasAtom = lib.CanvasAtom;
 
