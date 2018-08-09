@@ -129,7 +129,9 @@ const CanvasSequencer = (function defineCanvasSequencer() {
     }
 
     execute(context) {
+      context.save();
       this[symbols.sequence].forEach( a => a.execute(context) );
+      context.restore();
     }
 
     toJSON() {
