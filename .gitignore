@@ -1,3 +1,6 @@
 # Dependency Directory
 node_modules
 
+# Personal edit startup script
+edit.sh
+
