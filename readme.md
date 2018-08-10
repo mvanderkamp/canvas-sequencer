@@ -87,3 +87,64 @@ const ctx2 = document.querySelector('#canvas2').getContext('2d');
 seq.execute(ctx2);
 ```
 
+## Blueprints
+
+Also accessible through this library is are sequence 'blueprints'. These allow
+you to define a sequence once using placeholder tags for keyvalues, then build
+executable sequences using the blueprint and a set of values to take the place
+of the tags.
+
+### How does it work?
+
+The tags you can pass to a blueprint are strings wrapped in curly braces. The
+string inside the curly braces should be the name of a property on the object
+with which you intend to build the executable sequence.
+
+Don't worry- if you want to pass the name of such a property into an actual
+context function, you can still do that. Strings without curly braces are
+ignored. If you want to pass a string wrapped in curly braces through to a
+context object, just add an extra set of curly braces.
+
+Here's an example that demonstrates the complete system in action:
+
+```javascript
+const values = { x: 250, y: 99 };
+const bp = new Blueprint();
+const ctx = document.querySelector('#canvas1').getContext('2d');
+
+bp.fillText('y',7,8);           
+bp.fillText('{{x}}',5,6);       
+bp.fillRect('{x}','{y}',30,40); 
+
+bp.build(values).execute(ctx);
+
+// Result will be the same as if you had done:
+ctx.fillText('y',7,8);
+ctx.fillText('{x}',5,6);
+ctx.fillRect(250, 99, 30, 40);
+
+// If you later change the x,y values:
+values.x = 101;
+values.y = 42;
+
+// You can simply rebuild and execute:
+bp.build(values).execute(ctx);
+
+// Now the result will be the same as if you had done:
+ctx.fillText('y',7,8);
+ctx.fillText('{x}',5,6);
+ctx.fillRect(101, 42, 30, 40);
+```  
+
+## Limitations
+
+The canvas sequences will be executed one at a time, in the correct sequence,
+but you cannot retrieve values in a useful manner. Therefore any context method
+which is intended as a getter has been removed and is currently unavailable. If
+you have a good idea for how to make it possible to remotely access these return
+values, let me know!
+
+Also be warned that I have not yet fully tested the API with complex arguments,
+for example Path objects. I suspect the library will need a bit of fine tuning
+to make sure this can happen.
+
