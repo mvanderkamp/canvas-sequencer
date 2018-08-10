@@ -1,6 +1,6 @@
 {
   "name": "canvas-sequencer",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Store, serialize, parse, and execute sequences of canvas context instructions.",
   "main": "index.js",
   "directories": {
