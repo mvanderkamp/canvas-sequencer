@@ -115,8 +115,8 @@ const CanvasSequencer = (function defineCanvasSequencer() {
   });
   
   const symbols = Object.freeze({
-    sequence: Symbol(),
-    push: Symbol(),
+    sequence: Symbol.for('sequence'),
+    push: Symbol.for('push'),
   });
 
   class CanvasSequencer {
@@ -175,8 +175,47 @@ const CanvasSequencer = (function defineCanvasSequencer() {
   return CanvasSequencer;
 })();
 
+const Blueprint = (function defineBlueprint() {
+  const symbols = Object.freeze({
+    sequence: Symbol.for('sequence'),
+    push: Symbol.for('push'),
+  });
+
+  class Blueprint extends CanvasSequencer {
+    constructor() {
+      super();
+    }
+
+    build(values = {}) {
+      const seq = new CanvasSequencer();
+      this[symbols.sequence].forEach( a => {
+        const [type, value, args] = Object.values(a);
+        const realArgs = args.map( v => {
+          let retval = v;
+          if (typeof v === 'string') {
+            const tag = v.replace(/^{|}$/g, '');
+            if (tag !== v) {
+              retval = values.hasOwnProperty(tag) ? values[tag] : tag;
+            }
+          }
+          return retval;
+        });
+        seq[symbols.push](type, value, ...realArgs);
+      });
+      return seq;
+    }
+
+    execute() {
+      throw 'Cannot execute a blueprint.';
+    }
+  }
+
+  return Blueprint;
+})();
+
 if (typeof exports !== 'undefined') {
   exports.CanvasSequencer = CanvasSequencer;
   exports.CanvasAtom = CanvasAtom;
+  exports.Blueprint = Blueprint;
 }
 
