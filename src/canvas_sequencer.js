@@ -139,7 +139,7 @@ const CanvasSequencer = (function defineCanvasSequencer() {
     }
   }
 
-  CanvasSequencer.fromString = function(str = '') {
+  CanvasSequencer.fromString = function(str = null) {
     const obj = JSON.parse(str);
     if (obj && (obj.sequence instanceof Array)) {
       const seq = new CanvasSequencer();
@@ -210,7 +210,7 @@ const Blueprint = (function defineBlueprint() {
     }
   }
 
-  Blueprint.fromString = function(str = '') {
+  Blueprint.fromString = function(str = null) {
     const obj = JSON.parse(str);
     if (obj && (obj.sequence instanceof Array)) {
       const seq = new Blueprint();
