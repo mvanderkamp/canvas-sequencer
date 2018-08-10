@@ -136,6 +136,19 @@ ctx.fillText('{x}',5,6);
 ctx.fillRect(101, 42, 30, 40);
 ```  
 
+### Transmitting and unpacking blueprints
+
+You can transmit and unpack a `Blueprint` just as you would with the regular
+`CanvasSequencer` object:
+
+```javascript
+emitter.emit('new-blueprint', bp); // for some Blueprint bp
+```
+
+```javascript
+const bp = Blueprint.fromString(data); // for received blueprint string data
+```
+
 ## Limitations
 
 The canvas sequences will be executed one at a time, in the correct sequence,
