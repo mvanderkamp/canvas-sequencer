@@ -210,6 +210,19 @@ const Blueprint = (function defineBlueprint() {
     }
   }
 
+  Blueprint.fromString = function(str = '') {
+    const obj = JSON.parse(str);
+    if (obj && (obj.sequence instanceof Array)) {
+      const seq = new Blueprint();
+      obj.sequence.forEach( a => {
+        const [type, property, args] = Object.values(a);
+        seq[symbols.push](type, property, ...args);
+      });
+      return seq;
+    }
+    return null;
+  }
+
   return Blueprint;
 })();
 

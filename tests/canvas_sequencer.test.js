@@ -248,5 +248,36 @@ describe('Blueprint', () => {
       expect(ctx.fillRect).toHaveBeenLastCalledWith(101,42,30,40);
     });
   });
+
+  describe('toJSON()', () => {
+    const bp = new Blueprint();
+    bp.fillStyle = 'blue';
+    bp.fillRect(5,'{y}',7,8);
+
+    test('Produces a JSON parsable string', () => {
+      const str = bp.toJSON();
+      expect(typeof str).toBe('string');
+      expect(() => JSON.parse(str)).not.toThrow();
+      const obj = JSON.parse(str);
+      expect(typeof obj).toBe('object');
+    });
+  });
+
+  describe('.fromString(str)', () => {
+    const bp = new Blueprint();
+    bp.fillStyle = 'blue';
+    bp.fillRect(5,'{y}',7,8);
+    const str = bp.toJSON();
+    
+    test('Produces a Blueprint object', () => {
+      const seq = Blueprint.fromString(str);
+      expect(seq).toBeInstanceOf(Blueprint);
+    });
+
+    test('Reproduces the original sequence', () => {
+      const seq = Blueprint.fromString(str);
+      expect(seq).toEqual(bp);
+    });
+  });
 });
 
