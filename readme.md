@@ -24,8 +24,15 @@ issues with the `eval()` technique fade away.
 
 ### Importing:
 
+Server side:
 ```javascript
-const CanvasSequencer = require('canvas-sequencer').CanvasSequencer;
+const { CanvasSequencer } = require('canvas-sequencer');
+```
+
+Client side:
+```html
+<script src="path/to/node_modules/canvas-sequencer/src/canvas_sequencer.js">
+</script>
 ```
 
 ### Creating a sequence:
@@ -108,6 +115,7 @@ context object, just add an extra set of curly braces.
 Here's an example that demonstrates the complete system in action:
 
 ```javascript
+const { Blueprint } = require('canvas-sequencer');
 const values = { x: 250, y: 99 };
 const bp = new Blueprint();
 const ctx = document.querySelector('#canvas1').getContext('2d');
@@ -118,10 +126,13 @@ bp.fillRect('{x}','{y}',30,40);
 
 bp.build(values).execute(ctx);
 
-// Result will be the same as if you had done:
-ctx.fillText('y',7,8);
-ctx.fillText('{x}',5,6);
-ctx.fillRect(250, 99, 30, 40);
+/*
+ * The result will be the same as if you had done:
+ * 
+ * ctx.fillText('y',7,8);
+ * ctx.fillText('{x}',5,6);
+ * ctx.fillRect(250,99,30,40);
+ */
 
 // If you later change the x,y values:
 values.x = 101;
@@ -130,10 +141,13 @@ values.y = 42;
 // You can simply rebuild and execute:
 bp.build(values).execute(ctx);
 
-// Now the result will be the same as if you had done:
-ctx.fillText('y',7,8);
-ctx.fillText('{x}',5,6);
-ctx.fillRect(101, 42, 30, 40);
+/*
+ * Now the result will be the same as if you had done:
+ * 
+ * ctx.fillText('y',7,8);
+ * ctx.fillText('{x}',5,6);
+ * ctx.fillRect(101,42,30,40);
+ */
 ```  
 
 ### Transmitting and unpacking blueprints
