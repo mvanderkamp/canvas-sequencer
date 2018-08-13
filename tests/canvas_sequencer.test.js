@@ -14,7 +14,6 @@ describe('CanvasAtom', () => {
     describe('constructor(type, value, ...args)', () => {
       test('Returns a valid object of correct type', () => {
         const ca = new CanvasAtom(CanvasAtom.METHOD,'arc',1,2,3,0,Math.PI);
-        expect(ca).toBeInstanceOf(CanvasAtom);
         expect(ca.type).toEqual(CanvasAtom.METHOD);
         expect(ca.value).toEqual('arc');
         expect(ca.args).toBeInstanceOf(Array);
@@ -38,7 +37,6 @@ describe('CanvasAtom', () => {
     describe('constructor(type, value, ...args)', () => {
       test('Returns a valid object of correct type', () => {
         const ca = new CanvasAtom(CanvasAtom.PROPERTY,'font','12px serif');
-        expect(ca).toBeInstanceOf(CanvasAtom);
         expect(ca.type).toEqual(CanvasAtom.PROPERTY);
         expect(ca.value).toEqual('font');
         expect(ca.args).toBeInstanceOf(Array);
@@ -71,7 +69,6 @@ describe('CanvasSequencer', () => {
     const seq = Object.getOwnPropertySymbols(cs)[0];
     test('Can have methods pushed into its sequence', () => {
       expect(() => cs.arc(0,1,2,3,Math.PI)).not.toThrow();
-      expect(cs[seq][0]).toBeInstanceOf(CanvasAtom);
       expect(cs[seq][0].type).toBe(CanvasAtom.METHOD);
       expect(cs[seq][0].value).toBe('arc');
       expect(cs[seq][0].args).toEqual([0,1,2,3,Math.PI]);
@@ -79,7 +76,6 @@ describe('CanvasSequencer', () => {
 
     test('Additional methods get pushed to end of sequence', () => {
       expect(() => cs.save()).not.toThrow();
-      expect(cs[seq][1]).toBeInstanceOf(CanvasAtom);
       expect(cs[seq][1].type).toBe(CanvasAtom.METHOD);
       expect(cs[seq][1].value).toBe('save');
       expect(cs[seq][1].args).toEqual([]);
@@ -91,7 +87,6 @@ describe('CanvasSequencer', () => {
     const seq = Object.getOwnPropertySymbols(cs)[0];
     test('Can have properties pushed into its sequence', () => {
       expect(() => cs.lineJoin = 'bevel').not.toThrow();
-      expect(cs[seq][0]).toBeInstanceOf(CanvasAtom);
       expect(cs[seq][0].type).toBe(CanvasAtom.PROPERTY);
       expect(cs[seq][0].value).toBe('lineJoin');
       expect(cs[seq][0].args).toEqual(['bevel']);
@@ -99,7 +94,6 @@ describe('CanvasSequencer', () => {
 
     test('Additional properties get pushed to end of sequence', () => {
       expect(() => cs.strokeStyle = 'blue').not.toThrow();
-      expect(cs[seq][1]).toBeInstanceOf(CanvasAtom);
       expect(cs[seq][1].type).toBe(CanvasAtom.PROPERTY);
       expect(cs[seq][1].value).toBe('strokeStyle');
       expect(cs[seq][1].args).toEqual(['blue']);

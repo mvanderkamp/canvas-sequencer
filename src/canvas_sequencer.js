@@ -11,26 +11,57 @@
 
 'use strict';
 
+/*
+ * A CanvasAtom is a unit of execution in a CanvasSequence. It comes in two
+ * flavours: one for describing a method call, one for describing a property
+ * assignment.
+ */
 const CanvasAtom = (function defineCanvasAtom() {
   const locals = Object.freeze({
     METHOD: 'method',
     PROPERTY: 'property',
   });
 
-  class CanvasAtom {
-    constructor(type, value, ...args) {
+  /*
+   * Internal common constructor definition.
+   */
+  class Atom {
+    constructor(type, value, args) {
       this.type = type;
       this.value = value;
       this.args = args;
     }
+  }
 
+  /*
+   * Each flavour needs its own execute() definition.
+   */
+  class MethodCanvasAtom extends Atom {
     execute(context) {
-      switch(this.type) {
-        case locals.METHOD:
-          context[this.value](...this.args);
+      context[this.value](...this.args);
+    }
+  }
+
+  class PropertyCanvasAtom extends Atom {
+    execute(context) {
+      context[this.value] = this.args[0];
+    }
+  }
+
+  /*
+   * The CanvasAtom is the class that will be exposed.
+   * I'm not sure I like the way this is structured, but at least it's better
+   * than 'switch'ing on the type every time execute() is called. This way, we
+   * only have to 'switch' once.
+   */
+  class CanvasAtom {
+    constructor(type, value, ...args) {
+      switch (type) {
+        case locals.METHOD: 
+          return new MethodCanvasAtom(type, value, args);
           break;
         case locals.PROPERTY:
-          context[this.value] = this.args[0];
+          return new PropertyCanvasAtom(type, value, args);
           break;
       }
     }
@@ -58,22 +89,13 @@ const CanvasSequencer = (function defineCanvasSequencer() {
       'clearRect',
       'clip',
       'closePath',
-      'createImageData',
-      'createLinearGradient',
-      'createPattern',
-      'createRadialGradient',
       'drawFocusIfNeeded',
       'drawImage',
       'ellipse',
       'fill',
       'fillRect',
       'fillText',
-      'getImageData',
-      'getLineDash',
-      'isPointInPath',
-      'isPointInStroke',
       'lineTo',
-      'measureText',
       'moveTo',
       'putImageData',
       'quadraticCurveTo',
