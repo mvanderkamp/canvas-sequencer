@@ -111,19 +111,19 @@ describe('CanvasBlueprint', () => {
     });
   });
 
-  describe('.fromString(str)', () => {
+  describe('[symbols.fromString](str)', () => {
     const bp = new CanvasBlueprint();
     bp.fillStyle = 'blue';
     bp.fillRect(5,'{y}',7,8);
     const str = bp.toJSON();
     
     test('Produces a CanvasBlueprint object', () => {
-      const seq = CanvasBlueprint.fromString(str);
+      const seq = new CanvasBlueprint(str);
       expect(seq).toBeInstanceOf(CanvasBlueprint);
     });
 
     test('Reproduces the original sequence', () => {
-      const seq = CanvasBlueprint.fromString(str);
+      const seq = new CanvasBlueprint(str);
       expect(seq).toEqual(bp);
     });
   });

@@ -15,39 +15,41 @@ describe('CanvasSequencer', () => {
     });
   });
 
-  describe(CanvasAtom.METHOD, () => {
-    const cs = new CanvasSequencer();
-    const seq = Object.getOwnPropertySymbols(cs)[0];
-    test('Can have methods pushed into its sequence', () => {
-      expect(() => cs.arc(0,1,2,3,Math.PI)).not.toThrow();
-      expect(cs[seq][0].type).toBe(CanvasAtom.METHOD);
-      expect(cs[seq][0].inst).toBe('arc');
-      expect(cs[seq][0].args).toEqual([0,1,2,3,Math.PI]);
+  describe('Instruction types', () => {
+    describe(CanvasAtom.METHOD, () => {
+      const cs = new CanvasSequencer();
+      const seq = Object.getOwnPropertySymbols(cs)[0];
+      test('Can have methods pushed into its sequence', () => {
+        expect(() => cs.arc(0,1,2,3,Math.PI)).not.toThrow();
+        expect(cs[seq][0].type).toBe(CanvasAtom.METHOD);
+        expect(cs[seq][0].inst).toBe('arc');
+        expect(cs[seq][0].args).toEqual([0,1,2,3,Math.PI]);
+      });
+
+      test('Additional methods get pushed to end of sequence', () => {
+        expect(() => cs.save()).not.toThrow();
+        expect(cs[seq][1].type).toBe(CanvasAtom.METHOD);
+        expect(cs[seq][1].inst).toBe('save');
+        expect(cs[seq][1].args).toEqual([]);
+      });
     });
 
-    test('Additional methods get pushed to end of sequence', () => {
-      expect(() => cs.save()).not.toThrow();
-      expect(cs[seq][1].type).toBe(CanvasAtom.METHOD);
-      expect(cs[seq][1].inst).toBe('save');
-      expect(cs[seq][1].args).toEqual([]);
-    });
-  });
+    describe(CanvasAtom.PROPERTY, () => {
+      const cs = new CanvasSequencer();
+      const seq = Object.getOwnPropertySymbols(cs)[0];
+      test('Can have properties pushed into its sequence', () => {
+        expect(() => cs.lineJoin = 'bevel').not.toThrow();
+        expect(cs[seq][0].type).toBe(CanvasAtom.PROPERTY);
+        expect(cs[seq][0].inst).toBe('lineJoin');
+        expect(cs[seq][0].args).toEqual(['bevel']);
+      });
 
-  describe(CanvasAtom.PROPERTY, () => {
-    const cs = new CanvasSequencer();
-    const seq = Object.getOwnPropertySymbols(cs)[0];
-    test('Can have properties pushed into its sequence', () => {
-      expect(() => cs.lineJoin = 'bevel').not.toThrow();
-      expect(cs[seq][0].type).toBe(CanvasAtom.PROPERTY);
-      expect(cs[seq][0].inst).toBe('lineJoin');
-      expect(cs[seq][0].args).toEqual(['bevel']);
-    });
-
-    test('Additional properties get pushed to end of sequence', () => {
-      expect(() => cs.strokeStyle = 'blue').not.toThrow();
-      expect(cs[seq][1].type).toBe(CanvasAtom.PROPERTY);
-      expect(cs[seq][1].inst).toBe('strokeStyle');
-      expect(cs[seq][1].args).toEqual(['blue']);
+      test('Additional properties get pushed to end of sequence', () => {
+        expect(() => cs.strokeStyle = 'blue').not.toThrow();
+        expect(cs[seq][1].type).toBe(CanvasAtom.PROPERTY);
+        expect(cs[seq][1].inst).toBe('strokeStyle');
+        expect(cs[seq][1].args).toEqual(['blue']);
+      });
     });
   });
 
@@ -87,19 +89,19 @@ describe('CanvasSequencer', () => {
     });
   });
 
-  describe('.fromString(str)', () => {
+  describe('[symbols.fromString](str)', () => {
     const cs = new CanvasSequencer();
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
     const str = cs.toJSON();
-    
+
     test('Produces a CanvasSequencer object', () => {
-      const seq = CanvasSequencer.fromString(str);
+      const seq = new CanvasSequencer(str);
       expect(seq).toBeInstanceOf(CanvasSequencer);
     });
 
     test('Reproduces the original sequence', () => {
-      const seq = CanvasSequencer.fromString(str);
+      const seq = new CanvasSequencer(str);
       expect(seq).toEqual(cs);
     });
   });

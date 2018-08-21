@@ -46,17 +46,5 @@ class CanvasBlueprint extends CanvasSequencer {
   }
 }
 
-CanvasBlueprint.fromString = function(str = null) {
-  const obj = JSON.parse(str);
-  if (obj && (obj.sequence instanceof Array)) {
-    const seq = new CanvasBlueprint();
-    obj.sequence.forEach( ({ type, inst, args }) => {
-      seq[symbols.push](type, inst, ...args);
-    });
-    return seq;
-  }
-  return null;
-}
-
 module.exports = CanvasBlueprint;
 

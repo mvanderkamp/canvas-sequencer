@@ -71,11 +71,22 @@ const locals = Object.freeze({
 const symbols = Object.freeze({
   sequence: Symbol.for('sequence'),
   push: Symbol.for('push'),
+  fromString: Symbol.for('fromString'),
 });
 
 class CanvasSequencer {
-  constructor() {
+  constructor(str = null) {
     this[symbols.sequence] = [];
+    if (str) this[symbols.fromString](str);
+  }
+
+  [symbols.fromString](str) {
+    const data = JSON.parse(str);
+    if (data && (data.sequence instanceof Array)) {
+      data.sequence.forEach( ({ type, inst, args }) => {
+        this[symbols.push](type, inst, ...args);
+      });
+    }
   }
 
   [symbols.push](...args) {
@@ -91,18 +102,6 @@ class CanvasSequencer {
   toJSON() {
     return JSON.stringify({ sequence: this[symbols.sequence] });
   }
-}
-
-CanvasSequencer.fromString = function(str = null) {
-  const obj = JSON.parse(str);
-  if (obj && (obj.sequence instanceof Array)) {
-    const seq = new CanvasSequencer();
-    obj.sequence.forEach( ({ type, inst, args }) => {
-      seq[symbols.push](type, inst, ...args);
-    });
-    return seq;
-  }
-  return null;
 }
 
 locals.METHODS.forEach( m => {
