@@ -37,7 +37,6 @@ class MethodCanvasAtom extends Atom {
   }
 
   execute(context) {
-    console.log("executing:", this);
     context[this.inst](...this.args);
   }
 }
