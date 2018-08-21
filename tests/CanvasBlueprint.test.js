@@ -102,28 +102,30 @@ describe('CanvasBlueprint', () => {
     bp.fillStyle = 'blue';
     bp.fillRect(5,'{y}',7,8);
 
-    test('Produces a JSON parsable string', () => {
-      const str = bp.toJSON();
-      expect(typeof str).toBe('string');
-      expect(() => JSON.parse(str)).not.toThrow();
-      const obj = JSON.parse(str);
-      expect(typeof obj).toBe('object');
+    test('Produces a JSON serializable object', () => {
+      const data = bp.toJSON();
+      let tojson, fromjson
+      expect(typeof data).toBe('object');
+      expect(() => tojson = JSON.stringify(data)).not.toThrow();
+      expect(() => fromjson = JSON.parse(tojson)).not.toThrow();
+      expect(typeof fromjson).toBe('object');
+      expect(fromjson.sequence).toBeInstanceOf(Array);
     });
   });
 
-  describe('[symbols.fromString](str)', () => {
+  describe('[symbols.fromJSON](data)', () => {
     const bp = new CanvasBlueprint();
     bp.fillStyle = 'blue';
     bp.fillRect(5,'{y}',7,8);
-    const str = bp.toJSON();
+    const data = bp.toJSON();
     
     test('Produces a CanvasBlueprint object', () => {
-      const seq = new CanvasBlueprint(str);
+      const seq = new CanvasBlueprint(data);
       expect(seq).toBeInstanceOf(CanvasBlueprint);
     });
 
     test('Reproduces the original sequence', () => {
-      const seq = new CanvasBlueprint(str);
+      const seq = new CanvasBlueprint(data);
       expect(seq).toEqual(bp);
     });
   });

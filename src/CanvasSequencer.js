@@ -71,22 +71,19 @@ const locals = Object.freeze({
 const symbols = Object.freeze({
   sequence: Symbol.for('sequence'),
   push: Symbol.for('push'),
-  fromString: Symbol.for('fromString'),
+  fromJSON: Symbol.for('fromJSON'),
 });
 
 class CanvasSequencer {
-  constructor(str = null) {
+  constructor(data = null) {
     this[symbols.sequence] = [];
-    if (str) this[symbols.fromString](str);
+    if (data) this[symbols.fromJSON](data);
   }
 
-  [symbols.fromString](str) {
-    const data = JSON.parse(str);
-    if (data && (data.sequence instanceof Array)) {
-      data.sequence.forEach( ({ type, inst, args }) => {
-        this[symbols.push](type, inst, ...args);
-      });
-    }
+  [symbols.fromJSON](data = {}) {
+    data.sequence.forEach( ({ type, inst, args }) => {
+      this[symbols.push](type, inst, ...args);
+    });
   }
 
   [symbols.push](...args) {
@@ -100,7 +97,7 @@ class CanvasSequencer {
   }
 
   toJSON() {
-    return JSON.stringify({ sequence: this[symbols.sequence] });
+    return { sequence: this[symbols.sequence] };
   }
 }
 

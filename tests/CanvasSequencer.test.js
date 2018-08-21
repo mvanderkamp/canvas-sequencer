@@ -80,28 +80,30 @@ describe('CanvasSequencer', () => {
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
 
-    test('Produces a JSON parsable string', () => {
-      const str = cs.toJSON();
-      expect(typeof str).toBe('string');
-      expect(() => JSON.parse(str)).not.toThrow();
-      const obj = JSON.parse(str);
-      expect(typeof obj).toBe('object');
+    test('Produces a JSON serializable object', () => {
+      const data = cs.toJSON();
+      let tojson, fromjson
+      expect(typeof data).toBe('object');
+      expect(() => tojson = JSON.stringify(data)).not.toThrow();
+      expect(() => fromjson = JSON.parse(tojson)).not.toThrow();
+      expect(typeof fromjson).toBe('object');
+      expect(fromjson.sequence).toBeInstanceOf(Array);
     });
   });
 
-  describe('[symbols.fromString](str)', () => {
+  describe('[symbols.fromJSON](data)', () => {
     const cs = new CanvasSequencer();
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
-    const str = cs.toJSON();
+    const data = cs.toJSON();
 
     test('Produces a CanvasSequencer object', () => {
-      const seq = new CanvasSequencer(str);
+      const seq = new CanvasSequencer(data);
       expect(seq).toBeInstanceOf(CanvasSequencer);
     });
 
     test('Reproduces the original sequence', () => {
-      const seq = new CanvasSequencer(str);
+      const seq = new CanvasSequencer(data);
       expect(seq).toEqual(cs);
     });
   });

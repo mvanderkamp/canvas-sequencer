@@ -152,18 +152,6 @@ class CanvasBlueprint extends CanvasSequencer {
   }
 }
 
-CanvasBlueprint.fromString = function(str = null) {
-  const obj = JSON.parse(str);
-  if (obj && (obj.sequence instanceof Array)) {
-    const seq = new CanvasBlueprint();
-    obj.sequence.forEach( ({ type, inst, args }) => {
-      seq[symbols.push](type, inst, ...args);
-    });
-    return seq;
-  }
-  return null;
-}
-
 module.exports = CanvasBlueprint;
 
 
@@ -241,11 +229,19 @@ const locals = Object.freeze({
 const symbols = Object.freeze({
   sequence: Symbol.for('sequence'),
   push: Symbol.for('push'),
+  fromJSON: Symbol.for('fromJSON'),
 });
 
 class CanvasSequencer {
-  constructor() {
+  constructor(data = null) {
     this[symbols.sequence] = [];
+    if (data) this[symbols.fromJSON](data);
+  }
+
+  [symbols.fromJSON](data = {}) {
+    data.sequence.forEach( ({ type, inst, args }) => {
+      this[symbols.push](type, inst, ...args);
+    });
   }
 
   [symbols.push](...args) {
@@ -259,20 +255,8 @@ class CanvasSequencer {
   }
 
   toJSON() {
-    return JSON.stringify({ sequence: this[symbols.sequence] });
+    return { sequence: this[symbols.sequence] };
   }
-}
-
-CanvasSequencer.fromString = function(str = null) {
-  const obj = JSON.parse(str);
-  if (obj && (obj.sequence instanceof Array)) {
-    const seq = new CanvasSequencer();
-    obj.sequence.forEach( ({ type, inst, args }) => {
-      seq[symbols.push](type, inst, ...args);
-    });
-    return seq;
-  }
-  return null;
 }
 
 locals.METHODS.forEach( m => {
