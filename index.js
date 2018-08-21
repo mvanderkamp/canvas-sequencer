@@ -2,7 +2,8 @@
  * Access point for npm.
  */
 
-const lib = require('./src/canvas_sequencer.js');
-exports.CanvasSequencer = lib.CanvasSequencer;
-exports.Blueprint = lib.Blueprint;
+const CanvasSequencer = require('./src/CanvasSequencer.js');
+const CanvasBlueprint = require('./src/CanvasBlueprint.js');
+
+module.exports = { CanvasSequencer, CanvasBlueprint };
 
