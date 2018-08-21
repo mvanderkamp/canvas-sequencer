@@ -2,6 +2,15 @@
 
 Store, serialize, parse, and execute series of canvas context instructions!
 
+## Contents
+
+* [Why](#why)
+* [Importing](#importing)
+* [CanvasSequencer API](#canvassequencer-api)
+* [CanvasBlueprint](#canvasblueprint-api)
+* [Limitations](#limitations)
+* [What's new in 2.0](#changes)
+
 ## Why
 
 Normally, if you have a sequence of canvas instructions, you might predefine
@@ -20,20 +29,28 @@ transmit them. Once on the client side, you can unpack the instructions and
 execute them on any given context (or even multiple contexts), and all the
 issues with the `eval()` technique fade away.
 
-## API
+## Importing:
 
-### Importing:
+Server side, or in a Node environment.
 
-Server side:
 ```javascript
-const { CanvasSequencer } = require('canvas-sequencer');
+const { CanvasSequencer, CanvasBlueprint } = require('canvas-sequencer');
 ```
 
-Client side:
-```html
-<script src="path/to/node_modules/canvas-sequencer/src/canvas_sequencer.js">
-</script>
+The code is also available pre-bundled. This bundle is created with Browserify's
+"--standalone" option.
+
+```javascript
+const { CanvasSequencer, CanvasBlueprint } = require('canvas-sequencer/bundle');
 ```
+
+Client side, to access the bundled code in a script tag:
+
+```html
+<script src="path/to/node_modules/canvas-sequencer/bundle.js"></script>
+```
+
+## CanvasSequencer API
 
 ### Creating a sequence:
 
@@ -62,8 +79,8 @@ seq.stroke();
 ### Transmitting the sequence
 
 The sequencer exposes a `toJSON()` function, ensuring that with any library
-which uses `JSON.stringify()` to bundle data into packets for transmission (such
-as `socket.io`) you will not need to do anything fancy for transmission of your
+which uses JSON methods to bundle data into packets for transmission (such as
+`socket.io`) you will not need to do anything fancy for transmission of your
 sequences. Just send the sequence object as you would any other piece of
 serializable data.
 
@@ -73,12 +90,13 @@ emitter.emit('new-sequence', seq);
 
 ### Unpacking the sequence.
 
-The sequence will arrive in string form, so to extract a sequence, the sequencer
-exposes a `fromString()` method:
+The transmitted sequence needs to be revived in order for the CanvasSequencer
+functionality to be available. This can be done by passing the transmitted data
+object to the constructor:
 
 ```javascript
 // Assumes that you have recieve the packaged sequence in a 'data' variable.
-const seq = CanvasSequencer.fromString(data);
+const seq = new CanvasSequencer(data);
 ```
 
 ### Executing the sequence.
@@ -94,10 +112,10 @@ const ctx2 = document.querySelector('#canvas2').getContext('2d');
 seq.execute(ctx2);
 ```
 
-## Blueprints
+## CanvasBlueprint API
 
-Also accessible through this library is are sequence 'blueprints'. These allow
-you to define a sequence once using placeholder tags for keyvalues, then build
+Also accessible through this library are sequence 'blueprints'. These allow you
+to define a sequence once using placeholder tags for values, then build
 executable sequences using the blueprint and a set of values to take the place
 of the tags.
 
@@ -115,9 +133,9 @@ context object, just add an extra set of curly braces.
 Here's an example that demonstrates the complete system in action:
 
 ```javascript
-const { Blueprint } = require('canvas-sequencer');
+const { CanvasBlueprint } = require('canvas-sequencer');
 const values = { x: 250, y: 99 };
-const bp = new Blueprint();
+const bp = new CanvasBlueprint();
 const ctx = document.querySelector('#canvas1').getContext('2d');
 
 bp.fillText('y',7,8);           
@@ -152,15 +170,19 @@ bp.build(values).execute(ctx);
 
 ### Transmitting and unpacking blueprints
 
-You can transmit and unpack a `Blueprint` just as you would with the regular
-`CanvasSequencer` object:
+You can transmit and unpack a `CanvasBlueprint` just as you would with the
+regular `CanvasSequencer` object:
+
+Transmitting:
 
 ```javascript
-emitter.emit('new-blueprint', bp); // for some Blueprint bp
+emitter.emit('new-blueprint', bp); 
 ```
 
+Unpacking:
+
 ```javascript
-const bp = Blueprint.fromString(data); // for received blueprint string data
+const bp = new CanvasBlueprint(data); 
 ```
 
 ## Limitations
@@ -174,4 +196,33 @@ values, let me know!
 Also be warned that I have not yet fully tested the API with complex arguments,
 for example Path objects. I suspect the library will need a bit of fine tuning
 to make sure this can happen.
+
+## Changes
+
+The latest major release (2) marks a slight departure from the previous API.
+Specifically, the transmission method has been streamlined. Previously, I was
+doing something rather silly: I was calling JSON.stringify() inside the toJSON()
+routine. As toJSON() only needs to return a JSON serializable object, this was
+unnecessary, and was forcing an extra set of stringify() and parse() calls on
+either end of the transmission. So now toJSON() spits out an object, which means
+the data will be presented on the other end as an object.
+
+I also changed the unpacking method. Instead of calling a fromString() function:
+
+```javascript
+// This is the OLD way!
+const seq = CanvasSequencer.fromString(str);
+```
+
+You now pass the unpacked object to the constructor:
+
+```javascript
+// This is the NEW way!
+const seq = new CanvasSequencer(data);
+```
+
+I've also refactored code base by splitting the source code up into class files.
+This should make the source code much more maintainable in the long run.  If you
+still want the full source bundled together, it is available in `bundle.js`
+which was produced with `Browserify` using its `--standalone` option.
 
