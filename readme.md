@@ -221,8 +221,17 @@ You now pass the unpacked object to the constructor:
 const seq = new CanvasSequencer(data);
 ```
 
-I've also refactored code base by splitting the source code up into class files.
-This should make the source code much more maintainable in the long run.  If you
-still want the full source bundled together, it is available in `bundle.js`
-which was produced with `Browserify` using its `--standalone` option.
+I've also refactored the code base by splitting the source code up into class
+files.  This should make the source code much more maintainable in the long run.
+If you still want the full source bundled together, it is available in
+`bundle.js` which was produced with `Browserify` using its `--standalone`
+option.
+
+## Future Work
+
+At some point I will get around to testing the API with complex arguments (e.g.
+`Path` objects). When I've got time I will also get around to making sure that a
+properly minified version of the bundle is available. I will not be doing a
+transpilation though, because I don't think it's up to me to decide what kind of
+browser support should be enabled.
 
