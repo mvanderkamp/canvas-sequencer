@@ -3,6 +3,7 @@ node_modules
 
 # Personal edit startup script
 edit.sh
+usage.sh
 
 # swap files.
 *.swp
