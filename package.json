@@ -37,7 +37,7 @@
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "devDependencies": {
     "browserify": "^16.2.3",
-    "eslint": "^5.12.1",
+    "eslint": "^5.13.0",
     "jest": "^23.6.0"
   },
   "jest": {
