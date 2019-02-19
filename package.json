@@ -6,10 +6,6 @@
   "directories": {
     "test": "tests"
   },
-  "scripts": {
-    "build": "browserify index.js --standalone canvas-sequencer --outfile bundle.js",
-    "test": "jest"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mvanderkamp/canvas-sequencer.git"
