@@ -5,7 +5,7 @@
 'use strict';
 
 const CanvasBlueprint = require('../src/CanvasBlueprint.js');
-const CanvasSequencer = require('../src/CanvasSequencer.js');
+const CanvasSequence = require('../src/CanvasSequence.js');
 const CanvasAtom = require('../src/CanvasAtom.js');
 
 describe('CanvasBlueprint', () => {
@@ -57,11 +57,11 @@ describe('CanvasBlueprint', () => {
       strokeText: jest.fn(),
     };
 
-    test('Produces a CanvasSequencer', () => {
-      expect(bp.build()).toBeInstanceOf(CanvasSequencer);
+    test('Produces a CanvasSequence', () => {
+      expect(bp.build()).toBeInstanceOf(CanvasSequence);
     });
 
-    test('Produced CanvasSequencer can be executed', () => {
+    test('Produced CanvasSequence can be executed', () => {
       expect(() => bp.build(values).execute(ctx)).not.toThrow();
     });
 

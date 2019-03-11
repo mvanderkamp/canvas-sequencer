@@ -6,7 +6,7 @@ Store, serialize, parse, and execute series of canvas context instructions!
 
 * [Why](#why)
 * [Importing](#importing)
-* [CanvasSequencer API](#canvassequencer-api)
+* [CanvasSequence API](#canvassequence-api)
 * [CanvasBlueprint](#canvasblueprint-api)
 * [Limitations](#limitations)
 * [What's new in 2.0](#changes)
@@ -34,14 +34,14 @@ issues with the `eval()` technique fade away.
 Server side, or in a Node environment.
 
 ```javascript
-const { CanvasSequencer, CanvasBlueprint } = require('canvas-sequencer');
+const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer');
 ```
 
 The code is also available pre-bundled. This bundle is created with Browserify's
 "--standalone" option.
 
 ```javascript
-const { CanvasSequencer, CanvasBlueprint } = require('canvas-sequencer/bundle');
+const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer/bundle');
 ```
 
 Client side, to access the bundled code in a script tag:
@@ -50,12 +50,12 @@ Client side, to access the bundled code in a script tag:
 <script src="path/to/node_modules/canvas-sequencer/bundle.js"></script>
 ```
 
-## CanvasSequencer API
+## CanvasSequence API
 
 ### Creating a sequence:
 
 ```javascript
-const seq = new CanvasSequencer();
+const seq = new CanvasSequence();
 ```
 
 ### Defining instructions:
@@ -90,13 +90,13 @@ emitter.emit('new-sequence', seq);
 
 ### Unpacking the sequence.
 
-The transmitted sequence needs to be revived in order for the CanvasSequencer
+The transmitted sequence needs to be revived in order for the CanvasSequence
 functionality to be available. This can be done by passing the transmitted data
 object to the constructor:
 
 ```javascript
 // Assumes that you have recieve the packaged sequence in a 'data' variable.
-const seq = new CanvasSequencer(data);
+const seq = new CanvasSequence(data);
 ```
 
 ### Executing the sequence.
@@ -171,7 +171,7 @@ bp.build(values).execute(ctx);
 ### Transmitting and unpacking blueprints
 
 You can transmit and unpack a `CanvasBlueprint` just as you would with the
-regular `CanvasSequencer` object:
+regular `CanvasSequence` object:
 
 Transmitting:
 
@@ -199,33 +199,8 @@ to make sure this can happen.
 
 ## Changes
 
-The latest major release (2) marks a slight departure from the previous API.
-Specifically, the transmission method has been streamlined. Previously, I was
-doing something rather silly: I was calling JSON.stringify() inside the toJSON()
-routine. As toJSON() only needs to return a JSON serializable object, this was
-unnecessary, and was forcing an extra set of stringify() and parse() calls on
-either end of the transmission. So now toJSON() spits out an object, which means
-the data will be presented on the other end as an object.
-
-I also changed the unpacking method. Instead of calling a fromString() function:
-
-```javascript
-// This is the OLD way!
-const seq = CanvasSequencer.fromString(str);
-```
-
-You now pass the unpacked object to the constructor:
-
-```javascript
-// This is the NEW way!
-const seq = new CanvasSequencer(data);
-```
-
-I've also refactored the code base by splitting the source code up into class
-files.  This should make the source code much more maintainable in the long run.
-If you still want the full source bundled together, it is available in
-`bundle.js` which was produced with `Browserify` using its `--standalone`
-option.
+- CanvasSequencer was renamed to CanvasSequence.
+- Internal documentation was added.
 
 ## Future Work
 

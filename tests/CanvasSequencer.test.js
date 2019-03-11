@@ -1,23 +1,23 @@
 /*
- * This test suite is built for the CanvasSequencer class.
+ * This test suite is built for the CanvasSequence class.
  */
 
 'use strict';
 
-const CanvasSequencer = require('../src/CanvasSequencer.js');
+const CanvasSequence = require('../src/CanvasSequence.js');
 const CanvasAtom = require('../src/CanvasAtom.js');
 
-describe('CanvasSequencer', () => {
+describe('CanvasSequence', () => {
   describe('constructor()', () => {
     test('Returns an object of the correct type', () => {
-      const cs = new CanvasSequencer();
-      expect(cs).toBeInstanceOf(CanvasSequencer);
+      const cs = new CanvasSequence();
+      expect(cs).toBeInstanceOf(CanvasSequence);
     });
   });
 
   describe('Instruction types', () => {
     describe(CanvasAtom.METHOD, () => {
-      const cs = new CanvasSequencer();
+      const cs = new CanvasSequence();
       const seq = Object.getOwnPropertySymbols(cs)[0];
       test('Can have methods pushed into its sequence', () => {
         expect(() => cs.arc(0,1,2,3,Math.PI)).not.toThrow();
@@ -35,7 +35,7 @@ describe('CanvasSequencer', () => {
     });
 
     describe(CanvasAtom.PROPERTY, () => {
-      const cs = new CanvasSequencer();
+      const cs = new CanvasSequence();
       const seq = Object.getOwnPropertySymbols(cs)[0];
       test('Can have properties pushed into its sequence', () => {
         expect(() => cs.lineJoin = 'bevel').not.toThrow();
@@ -54,7 +54,7 @@ describe('CanvasSequencer', () => {
   });
 
   describe('execute(context)', () => {
-    const cs = new CanvasSequencer();
+    const cs = new CanvasSequence();
     const ctx = {};
     ctx.arc = jest.fn();
     ctx.lineJoin = 'round';
@@ -76,7 +76,7 @@ describe('CanvasSequencer', () => {
   });
 
   describe('toJSON()', () => {
-    const cs = new CanvasSequencer();
+    const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
 
@@ -92,18 +92,18 @@ describe('CanvasSequencer', () => {
   });
 
   describe('[symbols.fromJSON](data)', () => {
-    const cs = new CanvasSequencer();
+    const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
     const data = cs.toJSON();
 
-    test('Produces a CanvasSequencer object', () => {
-      const seq = new CanvasSequencer(data);
-      expect(seq).toBeInstanceOf(CanvasSequencer);
+    test('Produces a CanvasSequence object', () => {
+      const seq = new CanvasSequence(data);
+      expect(seq).toBeInstanceOf(CanvasSequence);
     });
 
     test('Reproduces the original sequence', () => {
-      const seq = new CanvasSequencer(data);
+      const seq = new CanvasSequence(data);
       expect(seq).toEqual(cs);
     });
   });

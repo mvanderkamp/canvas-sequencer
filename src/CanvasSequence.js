@@ -2,10 +2,7 @@
  * Author: Michael van der Kamp
  * Date: July/August, 2018
  * 
- * This file provides the definition of the CanvasSequencer class.
- *
- * A CanvasSequencer is a linear collection of CanvasAtoms, capable of being
- * executed on a CanvasRenderingContext2D.
+ * This file provides the definition of the CanvasSequence class.
  */
 
 'use strict';
@@ -68,41 +65,82 @@ const locals = Object.freeze({
   ],
 });
 
+// Mark properties as intended for internal use.
 const symbols = Object.freeze({
   sequence: Symbol.for('sequence'),
   push: Symbol.for('push'),
   fromJSON: Symbol.for('fromJSON'),
 });
 
-class CanvasSequencer {
+/**
+ * A CanvasSequence is a linear collection of CanvasAtoms, capable of being
+ * executed on a CanvasRenderingContext2D.
+ */
+class CanvasSequence {
+  /**
+   * @param {CanvasSequence} [data=null] - An unrevived (i.e. freshly
+   * transmitted) CanvasSequence. If present, the constructor revives the
+   * sequence. Note that an already revived CanvasSequence cannot be used as the
+   * argument here.
+   */
   constructor(data = null) {
+    /**
+     * The CanvasAtoms that form the sequence.
+     *
+     * @private
+     * @type {CanvasAtom[]}
+     */
     this[symbols.sequence] = [];
+
+    // If data is present, assume it is a CanvasSequence that needs reviving.
     if (data) this[symbols.fromJSON](data);
   }
 
+  /**
+   * Revive the sequence from transmitted JSON data.
+   *
+   * @private
+   * @param {CanvasSequence} [data={}]
+   */
   [symbols.fromJSON](data = {}) {
     data.sequence.forEach( ({ type, inst, args }) => {
       this[symbols.push](type, inst, ...args);
     });
   }
 
+  /**
+   * Push a new CanvasAtom onto the end of the sequence.
+   *
+   * @private
+   * @param {...mixed} args - The arguments to the CanvasAtom constructor.
+   */
   [symbols.push](...args) {
     this[symbols.sequence].push(new CanvasAtom(...args));
   }
 
+  /**
+   * Execute the sequence on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */
   execute(context) {
     context.save();
     this[symbols.sequence].forEach( a => a.execute(context) );
     context.restore();
   }
 
+  /**
+   * Export a JSON serialized version of the sequence, ready for transmission.
+   *
+   * @return {CanvasSequence} In JSON serialized form.
+   */
   toJSON() {
     return { sequence: this[symbols.sequence] };
   }
 }
 
 locals.METHODS.forEach( m => {
-  Object.defineProperty( CanvasSequencer.prototype, m, {
+  Object.defineProperty( CanvasSequence.prototype, m, {
     value: function pushMethodCall(...args) {
       this[symbols.push](CanvasAtom.METHOD, m, ...args);
     }, 
@@ -113,7 +151,7 @@ locals.METHODS.forEach( m => {
 });
 
 locals.PROPERTIES.forEach( p => {
-  Object.defineProperty( CanvasSequencer.prototype, p, {
+  Object.defineProperty( CanvasSequence.prototype, p, {
     get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.` },
     set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, v) },
     enumerable: true,
@@ -121,5 +159,5 @@ locals.PROPERTIES.forEach( p => {
   });
 });
 
-module.exports = CanvasSequencer;
+module.exports = CanvasSequence;
 

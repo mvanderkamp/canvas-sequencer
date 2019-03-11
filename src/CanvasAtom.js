@@ -2,7 +2,7 @@
  * Author: Michael van der Kamp
  * Date: July/August, 2018
  * 
- * This file defines the low level 'CanvasAtom' for use by a CanvasSequencer.
+ * This file defines the low level 'CanvasAtom' for use by a CanvasSequence.
  *
  * A CanvasAtom is a unit of execution in a CanvasSequence. It comes in two
  * flavours: one for describing a method call, one for describing a property
@@ -11,42 +11,93 @@
 
 'use strict';
 
-const TYPES = Object.freeze({
-  METHOD:   'method',
-  PROPERTY: 'property',
-});
+/**
+ * The types of CanvasAtoms that are available.
+ *
+ * @enum {string}
+ * @readonly
+ * @lends CanvasAtom
+ */
+const TYPES = {
+  /** @const */ METHOD:   'method',
+  /** @const */ PROPERTY: 'property',
+};
 
-/*
- * Internal common constructor definition.
+/**
+ * Internal common constructor definition for Canvas Atoms.
  */
 class Atom {
+  /**
+   * @param {string} inst - The canvas context instruction.
+   * @param {mixed[]} args - The arguments to the instruction.
+   */
   constructor(inst, args) {
+    /**
+     * The canvas context instruction.
+     *
+     * @private
+     * @type {string}
+     */
     this.inst = inst;
+
+    /**
+     * The arguments to the instruction.
+     *
+     * @private
+     * @type {mixed[]}
+     */
     this.args = args;
   }
 }
 
-/*
- * Each flavour needs its own execute() definition, and needs to specify its
- * type in its constructor.
+/**
+ * A MethodCanvasAtom is used for canvas context methods. The arguments will be
+ * treated as an actual array, all of which will be passed to the method when
+ * the atom is executed.
+ *
+ * @extends Atom
  */
 class MethodCanvasAtom extends Atom {
   constructor(inst, args) {
     super(inst, args);
+
+    /**
+     * The type of atom.
+     *
+     * @private
+     * @type {string}
+     */
     this.type = TYPES.METHOD;
   }
 
+  /**
+   * Execute the atom on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */
   execute(context) {
     context[this.inst](...this.args);
   }
 }
 
+/**
+ * A PropertyCanvasAtom is used for canvas context properties (a.k.a. fields).
+ * Only the first argument will be used, and will be the value assigned to the
+ * field.
+ *
+ * @extends Atom
+ */
 class PropertyCanvasAtom extends Atom {
   constructor(inst, args) {
     super(inst, args);
     this.type = TYPES.PROPERTY;
   }
 
+  /**
+   * Execute the atom on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */
   execute(context) {
     context[this.inst] = this.args[0];
   }
@@ -63,13 +114,16 @@ const atomOf = {
   [TYPES.PROPERTY]: PropertyCanvasAtom,
 };
 
-/*
- * The CanvasAtom is the class that will be exposed.
- * I'm not sure I like the way this is structured, but at least it's better
- * than 'switch'ing on the type every time execute() is called. This way, we
- * only have to 'switch' once.
+/**
+ * The exposed CanvasAtom class. Results in the instantiation of either a
+ * MethodCanvasAtom or a PropertyCanvasAtom, depending on the given type.
  */
 class CanvasAtom {
+  /**
+   * @param {string} type - Either CanvasAtom.METHOD or CanvasAtom.PROPERTY.
+   * @param {string} inst - The canvas context instruction.
+   * @param {mixed[]} args - The arguments to the instruction.
+   */
   constructor(type, inst, ...args) {
     return new atomOf[type](inst, args);
   }
@@ -79,8 +133,8 @@ class CanvasAtom {
  * Define the types once locally, but make them available externally as
  * immutable properties on the class.
  */
-Object.entries(TYPES).forEach( ([p,v]) => {
-  Object.defineProperty( CanvasAtom, p, {
+Object.entries(TYPES).forEach(([p,v]) => {
+  Object.defineProperty(CanvasAtom, p, {
     value: v,
     configurable: false,
     enumerable: true,
