@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="215px" preserveAspectRatio="none" style="width:169px;height:215px;" version="1.1" viewBox="0 0 169 215" width="169px" zoomAndPan="magnify"><defs/><g><!--entity _index--><rect fill="#F8F8F8" height="34.4844" rx="2" ry="2" style="stroke: #000000; stroke-width: 0.8;" width="53" x="74" y="8"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="84" y="30.0059">index</text><!--entity _CanvasAtom--><rect fill="#F8F8F8" height="34.4844" rx="2" ry="2" style="stroke: #000000; stroke-width: 0.8;" width="87" x="57" y="170"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="67" y="192.0059">CanvasAtom</text><!--entity _CanvasBlueprint--><rect fill="#F8F8F8" height="34.4844" rx="2" ry="2" style="stroke: #000000; stroke-width: 0.8;" width="105" x="6" y="62"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="85" x="16" y="84.0059">CanvasBlueprint</text><!--entity _CanvasSequencer--><rect fill="#F8F8F8" height="34.4844" rx="2" ry="2" style="stroke: #000000; stroke-width: 0.8;" width="116" x="42.5" y="116"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="52.5" y="138.0059">CanvasSequencer</text><!--link _CanvasBlueprint to _CanvasSequencer--><path d="M71.7891,96.0859 C75.6193,101.0105 79.8469,106.446 83.8534,111.5972 " fill="none" id="_CanvasBlueprint-_CanvasSequencer" style="stroke: #383838; stroke-width: 0.7;"/><polygon fill="#383838" points="87.1532,115.8399,84.7852,106.2799,84.0835,111.8931,78.4704,111.1914,87.1532,115.8399" style="stroke: #383838; stroke-width: 0.7;"/><!--link _CanvasSequencer to _CanvasAtom--><path d="M100.5,150.0859 C100.5,154.715 100.5,159.7956 100.5,164.6671 " fill="none" id="_CanvasSequencer-_CanvasAtom" style="stroke: #383838; stroke-width: 0.7;"/><polygon fill="#383838" points="100.5,169.8399,104.5,160.8399,100.5,164.8399,96.5,160.8399,100.5,169.8399" style="stroke: #383838; stroke-width: 0.7;"/><!--link _index to _CanvasBlueprint--><path d="M87.2109,42.0859 C83.3807,47.0105 79.1531,52.446 75.1466,57.5972 " fill="none" id="_index-_CanvasBlueprint" style="stroke: #383838; stroke-width: 2.0;"/><polygon fill="#383838" points="71.8468,61.8399,80.5296,57.1914,74.9165,57.8931,74.2148,52.2799,71.8468,61.8399" style="stroke: #383838; stroke-width: 2.0;"/><!--link _index to _CanvasSequencer--><path d="M112.7344,42.2588 C116.2844,48.2271 119.69,55.1442 121.5,62 C125.3572,76.6105 125.3572,81.3895 121.5,96 C120.1425,101.1418 117.8875,106.3182 115.3472,111.1028 " fill="none" id="_index-_CanvasSequencer" style="stroke: #383838; stroke-width: 2.0;"/><polygon fill="#383838" points="112.7344,115.7412,120.6365,109.8627,115.1883,111.3848,113.6662,105.9365,112.7344,115.7412" style="stroke: #383838; stroke-width: 2.0;"/><script type="text/plantuml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="188px" preserveAspectRatio="none" style="width:182px;height:188px;" version="1.1" viewBox="0 0 182 188" width="182px" zoomAndPan="magnify"><defs/><g><ellipse cx="109.8345" cy="21.242" fill="#F8F8F8" rx="26.3345" ry="13.242" style="stroke: #383838; stroke-width: 0.6;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="93.3345" y="24.9842">index</text><ellipse cx="109.8762" cy="164.242" fill="#F8F8F8" rx="50.3762" ry="13.242" style="stroke: #383838; stroke-width: 0.6;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="76.3762" y="167.9842">CanvasAtom</text><ellipse cx="64.8344" cy="68.1669" fill="#F8F8F8" rx="58.8344" ry="14.1669" style="stroke: #383838; stroke-width: 0.6;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="85" x="22.3344" y="71.9091">CanvasBlueprint</text><ellipse cx="110.0426" cy="116.7085" fill="#F8F8F8" rx="61.5426" ry="14.7085" style="stroke: #383838; stroke-width: 0.6;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="92" x="64.0426" y="120.4507">CanvasSequence</text><!--link CanvasBlueprint to CanvasSequence--><path d="M77.7748,81.7684 C82.5884,86.9564 88.1374,92.9369 93.2594,98.4574 " fill="none" id="CanvasBlueprint-CanvasSequence" style="stroke: #383838; stroke-width: 0.6;"/><polygon fill="#383838" points="96.7229,102.1903,93.5338,92.8721,93.3221,98.525,87.6692,98.3133,96.7229,102.1903" style="stroke: #383838; stroke-width: 0.6;"/><!--link CanvasSequence to CanvasAtom--><path d="M110,131.0097 C110,135.658 110,140.8658 110,145.746 " fill="none" id="CanvasSequence-CanvasAtom" style="stroke: #383838; stroke-width: 0.6;"/><polygon fill="#383838" points="110,150.8711,114,141.8711,110,145.8711,106,141.8711,110,150.8711" style="stroke: #383838; stroke-width: 0.6;"/><!--link <b>index</b> to CanvasBlueprint--><path d="M98.6446,32.8601 C93.5674,38.1629 87.4773,44.5237 81.8824,50.3673 " fill="none" id="&lt;b&gt;index&lt;/b&gt;-CanvasBlueprint" style="stroke: #383838; stroke-width: 1.0;"/><polygon fill="#383838" points="78.1066,54.3109,87.22,50.5764,81.5644,50.6993,81.4415,45.0438,78.1066,54.3109" style="stroke: #383838; stroke-width: 1.0;"/><!--link <b>index</b> to CanvasSequence--><path d="M121.4025,32.802 C126.2928,38.677 131.4588,46.1852 134,54 C137.8484,65.8345 137.7239,70.1258 134,82 C132.2615,87.5435 129.2826,92.9761 126.0032,97.8306 " fill="none" id="&lt;b&gt;index&lt;/b&gt;-CanvasSequence" style="stroke: #383838; stroke-width: 1.0;"/><polygon fill="#383838" points="122.9339,102.1129,131.428,97.1279,125.8466,98.0489,124.9256,92.4675,122.9339,102.1129" style="stroke: #383838; stroke-width: 1.0;"/><script type="text/plantuml"><![CDATA[
 @startuml
 
 scale max 1920 width
@@ -12,32 +12,31 @@ skinparam defaultFontName Tahoma
 skinparam defaultFontSize 12
 skinparam roundCorner 4
 skinparam dpi 150
-skinparam arrowThickness 0.7
+skinparam arrowThickness 0.6
 skinparam packageTitleAlignment left
 
 skinparam usecase {
-  borderThickness 0.4
-  fontSize 12
+  borderThickness 0.6
 }
 
 skinparam rectangle {
-  borderThickness 0.8
+  borderThickness 0.6
 }
 
 skinparam component {
-  borderThickness 1.2
+  borderThickness 1
 }
 
 
-rectangle "<b>index</b>" as _index
-rectangle "CanvasAtom" as _CanvasAtom
-rectangle "CanvasBlueprint" as _CanvasBlueprint
-rectangle "CanvasSequencer" as _CanvasSequencer
+(<b>index</b>)
+(CanvasAtom)
+(CanvasBlueprint)
+(CanvasSequence)
 
-_CanvasBlueprint --> _CanvasSequencer
-_CanvasSequencer --> _CanvasAtom
-_index ==> _CanvasBlueprint
-_index ==> _CanvasSequencer
+(CanvasBlueprint) --> (CanvasSequence)
+(CanvasSequence) --> (CanvasAtom)
+(<b>index</b>) --[thickness=1]> (CanvasBlueprint)
+(<b>index</b>) --[thickness=1]> (CanvasSequence)
 
 @enduml
 
