@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "devDependencies": {
-    "arkit": "^1.4.2",
     "browserify": "^16.2.3",
     "eslint": "^5.15.3",
     "jest": "^24.5.0"
