@@ -1,4 +1,6 @@
-.PHONY: build tags
+.PHONY: build transpile tags
+
+all: build tags
 
 build:
 	npx browserify index.js \
