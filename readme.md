@@ -199,6 +199,7 @@ to make sure this can happen.
 
 ## Changes
 
+- __3.0.1__ Added babelify transform for bundle
 - CanvasSequencer was renamed to CanvasSequence.
 - Internal documentation was added.
 
