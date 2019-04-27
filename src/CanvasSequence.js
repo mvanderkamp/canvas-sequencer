@@ -1,7 +1,7 @@
 /*
  * Author: Michael van der Kamp
  * Date: July/August, 2018
- * 
+ *
  * This file provides the definition of the CanvasSequence class.
  */
 
@@ -68,7 +68,7 @@ const locals = Object.freeze({
 // Mark properties as intended for internal use.
 const symbols = Object.freeze({
   sequence: Symbol.for('sequence'),
-  push: Symbol.for('push'),
+  push:     Symbol.for('push'),
   fromJSON: Symbol.for('fromJSON'),
 });
 
@@ -103,7 +103,7 @@ class CanvasSequence {
    * @param {CanvasSequence} [data={}]
    */
   [symbols.fromJSON](data = {}) {
-    data.sequence.forEach( ({ type, inst, args }) => {
+    data.sequence.forEach(({ type, inst, args }) => {
       this[symbols.push](type, inst, ...args);
     });
   }
@@ -125,7 +125,7 @@ class CanvasSequence {
    */
   execute(context) {
     context.save();
-    this[symbols.sequence].forEach( a => a.execute(context) );
+    this[symbols.sequence].forEach(a => a.execute(context));
     context.restore();
   }
 
@@ -139,22 +139,22 @@ class CanvasSequence {
   }
 }
 
-locals.METHODS.forEach( m => {
-  Object.defineProperty( CanvasSequence.prototype, m, {
+locals.METHODS.forEach(m => {
+  Object.defineProperty(CanvasSequence.prototype, m, {
     value: function pushMethodCall(...args) {
       this[symbols.push](CanvasAtom.METHOD, m, ...args);
-    }, 
-    writable: false,
-    enumerable: true,
+    },
+    writable:     false,
+    enumerable:   true,
     configurable: false,
   });
 });
 
-locals.PROPERTIES.forEach( p => {
-  Object.defineProperty( CanvasSequence.prototype, p, {
-    get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.` },
-    set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, v) },
-    enumerable: true,
+locals.PROPERTIES.forEach(p => {
+  Object.defineProperty(CanvasSequence.prototype, p, {
+    get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
+    set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, v); },
+    enumerable:   true,
     configurable: false,
   });
 });

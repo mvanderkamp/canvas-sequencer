@@ -1,7 +1,7 @@
 /*
  * Author: Michael van der Kamp
  * Date: July/August, 2018
- * 
+ *
  * This file defines the low level 'CanvasAtom' for use by a CanvasSequence.
  *
  * A CanvasAtom is a unit of execution in a CanvasSequence. It comes in two
@@ -133,12 +133,12 @@ class CanvasAtom {
  * Define the types once locally, but make them available externally as
  * immutable properties on the class.
  */
-Object.entries(TYPES).forEach(([p,v]) => {
+Object.entries(TYPES).forEach(([p, v]) => {
   Object.defineProperty(CanvasAtom, p, {
-    value: v,
+    value:        v,
     configurable: false,
-    enumerable: true,
-    writable: false,
+    enumerable:   true,
+    writable:     false,
   });
 });
 
