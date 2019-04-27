@@ -6,8 +6,11 @@ edit.sh
 usage.sh
 
 # swap files.
-*.swp
+*.sw[op]
 
 # tag files
 tags
+
+# parcel-bundler cache
+.cache
 

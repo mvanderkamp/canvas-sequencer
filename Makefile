@@ -3,9 +3,7 @@
 all: build tags
 
 build:
-	npx browserify index.js \
-		--standalone canvas-sequencer \
-		--outfile bundle.js;
+	npx parcel build index.js
 
 tags:
 	ctags -R src
