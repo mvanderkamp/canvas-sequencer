@@ -11,19 +11,9 @@
     "url": "git+https://github.com/mvanderkamp/canvas-sequencer.git"
   },
   "keywords": [
-    "javascript",
-    "canvas",
-    "context",
-    "sequence",
-    "graphics",
-    "CanvasRenderingContext2D",
-    "art",
-    "network",
-    "socket",
-    "transmit",
-    "JSON",
-    "serializable",
-    "parse"
+    "javascript", "canvas", "context", "sequence", "graphics",
+    "CanvasRenderingContext2D", "art", "network", "socket", "transmit", "JSON",
+    "serializable", "parse"
   ],
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "license": "MIT",
@@ -31,30 +21,6 @@
     "url": "https://github.com/mvanderkamp/canvas-sequencer/issues"
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            [
-              "@babel/preset-env",
-              {
-                "corejs": "3.x",
-                "targets": {
-                  "edge": "40",
-                  "firefox": "60",
-                  "chrome": "67",
-                  "safari": "11.1"
-                },
-                "useBuiltIns": "usage"
-              }
-            ]
-          ]
-        }
-      ]
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
