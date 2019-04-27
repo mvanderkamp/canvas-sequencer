@@ -75,14 +75,12 @@ const symbols = Object.freeze({
 /**
  * A CanvasSequence is a linear collection of CanvasAtoms, capable of being
  * executed on a CanvasRenderingContext2D.
+ *
+ * @param {CanvasSequence} [data=null] - An unrevived (i.e. freshly transmitted)
+ * CanvasSequence. If present, the constructor revives the sequence. Note that
+ * an already revived CanvasSequence cannot be used as the argument here.
  */
 class CanvasSequence {
-  /**
-   * @param {CanvasSequence} [data=null] - An unrevived (i.e. freshly
-   * transmitted) CanvasSequence. If present, the constructor revives the
-   * sequence. Note that an already revived CanvasSequence cannot be used as the
-   * argument here.
-   */
   constructor(data = null) {
     /**
      * The CanvasAtoms that form the sequence.
@@ -152,7 +150,7 @@ locals.METHODS.forEach(m => {
 
 locals.PROPERTIES.forEach(p => {
   Object.defineProperty(CanvasSequence.prototype, p, {
-    get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
+    get()  { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
     set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, v); },
     enumerable:   true,
     configurable: false,

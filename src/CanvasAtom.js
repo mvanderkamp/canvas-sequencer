@@ -25,12 +25,11 @@ const TYPES = {
 
 /**
  * Internal common constructor definition for Canvas Atoms.
+ *
+ * @param {string} inst - The canvas context instruction.
+ * @param {mixed[]} args - The arguments to the instruction.
  */
 class Atom {
-  /**
-   * @param {string} inst - The canvas context instruction.
-   * @param {mixed[]} args - The arguments to the instruction.
-   */
   constructor(inst, args) {
     /**
      * The canvas context instruction.
@@ -117,13 +116,12 @@ const atomOf = {
 /**
  * The exposed CanvasAtom class. Results in the instantiation of either a
  * MethodCanvasAtom or a PropertyCanvasAtom, depending on the given type.
+ *
+ * @param {string} type - Either CanvasAtom.METHOD or CanvasAtom.PROPERTY.
+ * @param {string} inst - The canvas context instruction.
+ * @param {mixed[]} args - The arguments to the instruction.
  */
 class CanvasAtom {
-  /**
-   * @param {string} type - Either CanvasAtom.METHOD or CanvasAtom.PROPERTY.
-   * @param {string} inst - The canvas context instruction.
-   * @param {mixed[]} args - The arguments to the instruction.
-   */
   constructor(type, inst, ...args) {
     return new atomOf[type](inst, args);
   }

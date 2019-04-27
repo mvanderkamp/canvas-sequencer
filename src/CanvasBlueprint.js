@@ -55,7 +55,8 @@ function replaceTags(str, values) {
  * @extends CanvasSequence
  */
 class CanvasBlueprint extends CanvasSequence {
-  /** Build the blueprint using the provided values.
+  /**
+   * Build the blueprint using the provided values.
    *
    * Rules:
    * - Strings not surrounded by curly braces {} will be returned.
