@@ -37,17 +37,18 @@ Server side, or in a Node environment.
 const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer');
 ```
 
-The code is also available pre-bundled. This bundle is created with Browserify's
-"--standalone" option.
+The code is also available pre-bundled, via `parcel-bundler`. You should
+probably create your own bundle though, so that you have control over browser
+targets, etc.
 
 ```javascript
-const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer/bundle');
+const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer/dist');
 ```
 
 Client side, to access the bundled code in a script tag:
 
 ```html
-<script src="path/to/node_modules/canvas-sequencer/bundle.js"></script>
+<script src="path/to/node_modules/canvas-sequencer/dist/index.js"></script>
 ```
 
 ## CanvasSequence API
@@ -199,15 +200,14 @@ to make sure this can happen.
 
 ## Changes
 
-- __3.0.1__ Added babelify transform for bundle
+- __3.0.2__ Switched to `parcel-bundler` for the bundle. Simpler to use, more
+  efficient.
+- __3.0.1__ Added babelify transform for the bundle.
 - CanvasSequencer was renamed to CanvasSequence.
 - Internal documentation was added.
 
 ## Future Work
 
 At some point I will get around to testing the API with complex arguments (e.g.
-`Path` objects). When I've got time I will also get around to making sure that a
-properly minified version of the bundle is available. I will not be doing a
-transpilation though, because I don't think it's up to me to decide what kind of
-browser support should be enabled.
+`Path` objects). 
 
