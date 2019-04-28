@@ -1,6 +1,6 @@
 {
   "name": "canvas-sequencer",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Store, serialize, parse, and execute sequences of canvas context instructions.",
   "main": "index.js",
   "directories": {
@@ -11,9 +11,19 @@
     "url": "git+https://github.com/mvanderkamp/canvas-sequencer.git"
   },
   "keywords": [
-    "javascript", "canvas", "context", "sequence", "graphics",
-    "CanvasRenderingContext2D", "art", "network", "socket", "transmit", "JSON",
-    "serializable", "parse"
+    "javascript",
+    "canvas",
+    "context",
+    "sequence",
+    "graphics",
+    "CanvasRenderingContext2D",
+    "art",
+    "network",
+    "socket",
+    "transmit",
+    "JSON",
+    "serializable",
+    "parse"
   ],
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "license": "MIT",
