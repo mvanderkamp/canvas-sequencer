@@ -87,13 +87,13 @@ describe('CanvasBlueprint', () => {
     });
 
     test('Tags are replaced with values passed to build()', () => {
-      expect(ctx.fillRect).toHaveBeenLastCalledWith(250,99,30,40);
+      expect(ctx.fillRect).toHaveBeenLastCalledWith(values.x,values.y,30,40);
     });
 
     test('Can be rebuilt correctly', () => {
       const values = { x: 101, y: 42 };
       expect(() => bp.build(values).execute(ctx)).not.toThrow();
-      expect(ctx.fillRect).toHaveBeenLastCalledWith(101,42,30,40);
+      expect(ctx.fillRect).toHaveBeenLastCalledWith(values.x,values.y,30,40);
     });
   });
 
