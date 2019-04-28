@@ -40,7 +40,7 @@ const symbols = Object.freeze({
  * performed, or the appropriate value.
  */
 function replaceTags(str, values) {
-  const tag = str.replace(/^{|}$/g, '');
+  const tag = str.replace(/^\{|\}$/gu, '');
   if (tag !== str) {
     return values.hasOwnProperty(tag) ? values[tag] : tag;
   }
