@@ -66,7 +66,7 @@
         "eol-last": "error",
         "eqeqeq": "off",
         "func-call-spacing": "error",
-        "func-name-matching": "error",
+        "func-name-matching": "off",
         "func-names": "error",
         "func-style": [
             "error",
@@ -124,7 +124,7 @@
                 "exceptAfterSingleLine": true
             }
         ],
-        "max-classes-per-file": "error",
+        "max-classes-per-file": "off",
         "max-depth": "error",
         "max-len": "error",
         "max-lines": "off",
