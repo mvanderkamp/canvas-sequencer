@@ -1,12 +1,12 @@
-.PHONY: build transpile tags
+.PHONY: lint release fix build tags
 
 lint:
 	npx eslint index.js src
 
-all: build tags
-
 fix:
 	npx eslint index.js src --fix
+
+release: lint build tags
 
 build:
 	npx parcel build index.js
