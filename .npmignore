@@ -1,4 +1,18 @@
+# local scripts
 edit.sh
 usage.sh
+
+# tag files
 tags
+
+# parcel-bundler cache
+.cache
+
+# test related
+coverage
+tests
+
+# production files
+Makefile
+.eslintrc.json
 
