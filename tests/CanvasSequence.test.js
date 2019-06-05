@@ -50,6 +50,10 @@ describe('CanvasSequence', () => {
         expect(cs[seq][1].inst).toBe('strokeStyle');
         expect(cs[seq][1].args).toEqual(['blue']);
       });
+
+      test('Attempting to "get" a property throws an error', () => {
+        expect(() => cs.strokeStyle).toThrow();
+      });
     });
   });
 
@@ -91,20 +95,25 @@ describe('CanvasSequence', () => {
     });
   });
 
-  describe('[symbols.fromJSON](data)', () => {
+  describe('[@@fromJSON](data)', () => {
+    const fromJSON = Symbol.for('fromJSON');
+    const sequence = Symbol.for('fromJSON');
+
     const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
     cs.fillRect(5,6,7,8);
     const data = cs.toJSON();
 
-    test('Produces a CanvasSequence object', () => {
-      const seq = new CanvasSequence(data);
-      expect(seq).toBeInstanceOf(CanvasSequence);
+    test('Reproduces the original sequence', () => {
+      const seq = new CanvasSequence();
+      seq[fromJSON](data);
+      expect(seq).toEqual(cs);
     });
 
-    test('Reproduces the original sequence', () => {
-      const seq = new CanvasSequence(data);
-      expect(seq).toEqual(cs);
+    test('Does nothing if no data provided', () => {
+      const seq = new CanvasSequence();
+      seq[fromJSON]();
+      expect(seq[sequence]).toHaveLength(0);
     });
   });
 });
