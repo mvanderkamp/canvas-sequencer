@@ -207,6 +207,8 @@ to make sure this can happen.
 
 ## Changes
 
+- __3.0.3__ Fixed a minor bug in the CanvasSequence class, improved test
+  coverage, added badges, update dependencies.
 - __3.0.2__ Switched to `parcel-bundler` for the bundle. Simpler to use, more
   efficient.
 - __3.0.1__ Added babelify transform for the bundle.
