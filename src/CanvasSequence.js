@@ -100,7 +100,7 @@ class CanvasSequence {
    * @private
    * @param {CanvasSequence} [data={}]
    */
-  [symbols.fromJSON](data = {}) {
+  [symbols.fromJSON](data = { sequence: [] }) {
     data.sequence.forEach(({ type, inst, args }) => {
       this[symbols.push](type, inst, ...args);
     });
