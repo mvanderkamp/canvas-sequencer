@@ -1,5 +1,9 @@
 # canvas-sequencer
 
+[![devDependencies Status](
+https://david-dm.org/mvanderkamp/canvas-sequencer/dev-status.svg)
+](https://david-dm.org/mvanderkamp/canvas-sequencer?type=dev)
+
 Store, serialize, parse, and execute series of canvas context instructions!
 
 ## Contents
