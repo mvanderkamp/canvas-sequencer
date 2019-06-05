@@ -1,5 +1,9 @@
 # canvas-sequencer
 
+[![Maintainability](
+https://api.codeclimate.com/v1/badges/777e9d732d4ceece8124/maintainability)
+](https://codeclimate.com/github/mvanderkamp/canvas-sequencer/maintainability)
+
 [![devDependencies Status](
 https://david-dm.org/mvanderkamp/canvas-sequencer/dev-status.svg)
 ](https://david-dm.org/mvanderkamp/canvas-sequencer?type=dev)
