@@ -33,8 +33,8 @@ describe('CanvasBlueprint', () => {
         bp.fillRect('{x}','{y}',30,40);
       }).not.toThrow();
     });
-  }); 
-  
+  });
+
   describe('build(values)', () => {
     const bp = new CanvasBlueprint();
     bp.lineWidth = 2;
@@ -118,7 +118,7 @@ describe('CanvasBlueprint', () => {
     bp.fillStyle = 'blue';
     bp.fillRect(5,'{y}',7,8);
     const data = bp.toJSON();
-    
+
     test('Produces a CanvasBlueprint object', () => {
       const seq = new CanvasBlueprint(data);
       expect(seq).toBeInstanceOf(CanvasBlueprint);

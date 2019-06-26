@@ -22,7 +22,7 @@ Store, serialize, parse, and execute series of canvas context instructions!
 
 Normally, if you have a sequence of canvas instructions, you might predefine
 them in a function which will be distributed in a script file to all your
-clients. 
+clients.
 
 Suppose, however, that you wish to be able to dynamically define instructions
 from the server, and have those instructions executed on the canvas contexts of
@@ -146,15 +146,15 @@ const values = { x: 250, y: 99 };
 const bp = new CanvasBlueprint();
 const ctx = document.querySelector('#canvas1').getContext('2d');
 
-bp.fillText('y',7,8);           
-bp.fillText('{{x}}',5,6);       
-bp.fillRect('{x}','{y}',30,40); 
+bp.fillText('y',7,8);
+bp.fillText('{{x}}',5,6);
+bp.fillRect('{x}','{y}',30,40);
 
 bp.build(values).execute(ctx);
 
 /*
  * The result will be the same as if you had done:
- * 
+ *
  * ctx.fillText('y',7,8);
  * ctx.fillText('{x}',5,6);
  * ctx.fillRect(250,99,30,40);
@@ -169,12 +169,12 @@ bp.build(values).execute(ctx);
 
 /*
  * Now the result will be the same as if you had done:
- * 
+ *
  * ctx.fillText('y',7,8);
  * ctx.fillText('{x}',5,6);
  * ctx.fillRect(101,42,30,40);
  */
-```  
+```
 
 ### Transmitting and unpacking blueprints
 
@@ -184,13 +184,13 @@ regular `CanvasSequence` object:
 Transmitting:
 
 ```javascript
-emitter.emit('new-blueprint', bp); 
+emitter.emit('new-blueprint', bp);
 ```
 
 Unpacking:
 
 ```javascript
-const bp = new CanvasBlueprint(data); 
+const bp = new CanvasBlueprint(data);
 ```
 
 ## Limitations
@@ -219,5 +219,5 @@ to make sure this can happen.
 ## Future Work
 
 At some point I will get around to testing the API with complex arguments (e.g.
-`Path` objects). 
+`Path` objects).
 
