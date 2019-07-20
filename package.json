@@ -32,15 +32,14 @@
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "eslint": "^6.0.1",
     "jest": "^24.8.0",
     "parcel-bundler": "^1.12.3"
   },
   "jest": {
     "testURL": "http://localhost/"
   },
-  "dependencies": {
-    "eslint": "^6.0.1"
-  }
+  "dependencies": {}
 }
