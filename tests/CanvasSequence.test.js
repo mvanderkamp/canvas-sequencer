@@ -2,6 +2,8 @@
  * This test suite is built for the CanvasSequence class.
  */
 
+/* global jest, describe, test, expect */
+
 'use strict';
 
 const CanvasSequence = require('../src/CanvasSequence.js');
@@ -20,10 +22,10 @@ describe('CanvasSequence', () => {
       const cs = new CanvasSequence();
       const seq = Object.getOwnPropertySymbols(cs)[0];
       test('Can have methods pushed into its sequence', () => {
-        expect(() => cs.arc(0,1,2,3,Math.PI)).not.toThrow();
+        expect(() => cs.arc(0, 1, 2, 3, Math.PI)).not.toThrow();
         expect(cs[seq][0].type).toBe(CanvasAtom.METHOD);
         expect(cs[seq][0].inst).toBe('arc');
-        expect(cs[seq][0].args).toEqual([0,1,2,3,Math.PI]);
+        expect(cs[seq][0].args).toEqual([0, 1, 2, 3, Math.PI]);
       });
 
       test('Additional methods get pushed to end of sequence', () => {
@@ -38,14 +40,18 @@ describe('CanvasSequence', () => {
       const cs = new CanvasSequence();
       const seq = Object.getOwnPropertySymbols(cs)[0];
       test('Can have properties pushed into its sequence', () => {
-        expect(() => cs.lineJoin = 'bevel').not.toThrow();
+        expect(() => {
+          cs.lineJoin = 'bevel';
+        }).not.toThrow();
         expect(cs[seq][0].type).toBe(CanvasAtom.PROPERTY);
         expect(cs[seq][0].inst).toBe('lineJoin');
         expect(cs[seq][0].args).toEqual(['bevel']);
       });
 
       test('Additional properties get pushed to end of sequence', () => {
-        expect(() => cs.strokeStyle = 'blue').not.toThrow();
+        expect(() => {
+          cs.strokeStyle = 'blue';
+        }).not.toThrow();
         expect(cs[seq][1].type).toBe(CanvasAtom.PROPERTY);
         expect(cs[seq][1].inst).toBe('strokeStyle');
         expect(cs[seq][1].args).toEqual(['blue']);
@@ -65,7 +71,7 @@ describe('CanvasSequence', () => {
     ctx.strokeStyle = 'red';
     ctx.save = jest.fn();
     ctx.restore = jest.fn();
-    cs.arc(0,1,2,3,Math.PI);
+    cs.arc(0, 1, 2, 3, Math.PI);
     cs.lineJoin = 'bevel';
     cs.strokeStyle = 'blue';
     cs.strokeStyle = 'green';
@@ -73,7 +79,7 @@ describe('CanvasSequence', () => {
     test('Executes sequence in order', () => {
       expect(() => cs.execute(ctx)).not.toThrow();
       expect(ctx.arc).toHaveBeenCalledTimes(1);
-      expect(ctx.arc).toHaveBeenCalledWith(0,1,2,3,Math.PI);
+      expect(ctx.arc).toHaveBeenCalledWith(0, 1, 2, 3, Math.PI);
       expect(ctx.lineJoin).toBe('bevel');
       expect(ctx.strokeStyle).toBe('green');
     });
@@ -82,14 +88,19 @@ describe('CanvasSequence', () => {
   describe('toJSON()', () => {
     const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
-    cs.fillRect(5,6,7,8);
+    cs.fillRect(5, 6, 7, 8);
 
     test('Produces a JSON serializable object', () => {
       const data = cs.toJSON();
-      let tojson, fromjson
+      let fromjson = null;
+      let tojson = null;
       expect(typeof data).toBe('object');
-      expect(() => tojson = JSON.stringify(data)).not.toThrow();
-      expect(() => fromjson = JSON.parse(tojson)).not.toThrow();
+      expect(() => {
+        tojson = JSON.stringify(data);
+      }).not.toThrow();
+      expect(() => {
+        fromjson = JSON.parse(tojson);
+      }).not.toThrow();
       expect(typeof fromjson).toBe('object');
       expect(fromjson.sequence).toBeInstanceOf(Array);
     });
@@ -101,7 +112,7 @@ describe('CanvasSequence', () => {
 
     const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
-    cs.fillRect(5,6,7,8);
+    cs.fillRect(5, 6, 7, 8);
     const data = cs.toJSON();
 
     test('Reproduces the original sequence', () => {

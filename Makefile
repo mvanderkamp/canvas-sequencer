@@ -1,10 +1,10 @@
 .PHONY: lint release fix build tags
 
 lint:
-	npx eslint index.js src
+	npx eslint index.js src tests;
 
 fix:
-	npx eslint index.js src --fix
+	npx eslint index.js src tests --fix;
 
 release: lint build tags
 
