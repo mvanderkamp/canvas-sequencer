@@ -1,4 +1,6 @@
-.PHONY: lint release fix build tags
+.PHONY: default lint release fix build tags
+
+default: lint tags
 
 lint:
 	npx eslint index.js src tests;
