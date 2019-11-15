@@ -207,6 +207,8 @@ to make sure this can happen.
 
 ## Changes
 
+- __3.0.5__ Slight performance improvement, fixed a buggy test, added support
+  for some newer experimental instructions.
 - __3.0.4__ Added badges, fixed up the README a bit.
 - __3.0.3__ Fixed a minor bug in the CanvasSequence class, improved test
   coverage, update dependencies.
