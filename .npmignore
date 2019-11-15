@@ -15,4 +15,5 @@ tests
 # production files
 Makefile
 .eslintrc.json
+.ignore
 
