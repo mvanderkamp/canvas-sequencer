@@ -11,10 +11,12 @@ const CanvasAtom = require('./CanvasAtom.js');
 
 const locals = Object.freeze({
   METHODS: [
+    'addHitRegion',
     'arc',
     'arcTo',
     'beginPath',
     'bezierCurveTo',
+    'clearHitRegions',
     'clearRect',
     'clip',
     'closePath',
@@ -29,11 +31,13 @@ const locals = Object.freeze({
     'putImageData',
     'quadraticCurveTo',
     'rect',
+    'removeHitREgion',
     'resetTransform',
     'restore',
     'rotate',
     'save',
     'scale',
+    'scrollPathIntoView',
     'setLineDash',
     'setTransform',
     'stroke',
@@ -44,12 +48,14 @@ const locals = Object.freeze({
   ],
 
   PROPERTIES: [
+    'direction',
     'fillStyle',
     'filter',
     'font',
     'globalAlpha',
     'globalCompositeOperation',
     'imageSmoothingEnabled',
+    'imageSmoothingQuality',
     'lineCap',
     'lineDashOffset',
     'lineJoin',
