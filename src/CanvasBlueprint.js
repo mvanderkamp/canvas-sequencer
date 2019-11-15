@@ -76,7 +76,7 @@ class CanvasBlueprint extends CanvasSequence {
       const realArgs = args.map(v => {
         return (typeof v === 'string') ? replaceTags(v, values) : v;
       });
-      seq[symbols.push](type, inst, ...realArgs);
+      seq[symbols.push](type, inst, realArgs);
     });
     return seq;
   }

@@ -27,7 +27,7 @@ const TYPES = {
  * Internal common constructor definition for Canvas Atoms.
  *
  * @param {string} inst - The canvas context instruction.
- * @param {mixed[]} args - The arguments to the instruction.
+ * @param {*[]} args - The arguments to the instruction.
  */
 class Atom {
   constructor(inst, args) {
@@ -43,7 +43,7 @@ class Atom {
      * The arguments to the instruction.
      *
      * @private
-     * @type {mixed[]}
+     * @type {*[]}
      */
     this.args = args;
   }
@@ -119,10 +119,10 @@ const atomOf = {
  *
  * @param {string} type - Either CanvasAtom.METHOD or CanvasAtom.PROPERTY.
  * @param {string} inst - The canvas context instruction.
- * @param {mixed[]} args - The arguments to the instruction.
+ * @param {*[]} args - The arguments to the instruction.
  */
 class CanvasAtom {
-  constructor(type, inst, ...args) {
+  constructor(type, inst, args) {
     return new atomOf[type](inst, args);
   }
 }

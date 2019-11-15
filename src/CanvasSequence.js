@@ -102,7 +102,7 @@ class CanvasSequence {
    */
   [symbols.fromJSON](data = { sequence: [] }) {
     data.sequence.forEach(({ type, inst, args }) => {
-      this[symbols.push](type, inst, ...args);
+      this[symbols.push](type, inst, args);
     });
   }
 
@@ -110,10 +110,12 @@ class CanvasSequence {
    * Push a new CanvasAtom onto the end of the sequence.
    *
    * @private
-   * @param {...mixed} args - The arguments to the CanvasAtom constructor.
+   * @param {string} type - The type of CanvasAtom to push.
+   * @param {string} inst - The canvas context instruction.
+   * @param {*[]} args - The arguments to the canvas context instruction.
    */
-  [symbols.push](...args) {
-    this[symbols.sequence].push(new CanvasAtom(...args));
+  [symbols.push](type, inst, args) {
+    this[symbols.sequence].push(new CanvasAtom(type, inst, args));
   }
 
   /**
@@ -140,7 +142,7 @@ class CanvasSequence {
 locals.METHODS.forEach(m => {
   Object.defineProperty(CanvasSequence.prototype, m, {
     value: function pushMethodCall(...args) {
-      this[symbols.push](CanvasAtom.METHOD, m, ...args);
+      this[symbols.push](CanvasAtom.METHOD, m, args);
     },
     writable:     false,
     enumerable:   true,
@@ -151,7 +153,7 @@ locals.METHODS.forEach(m => {
 locals.PROPERTIES.forEach(p => {
   Object.defineProperty(CanvasSequence.prototype, p, {
     get()  { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
-    set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, v); },
+    set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, [v]); },
     enumerable:   true,
     configurable: false,
   });
