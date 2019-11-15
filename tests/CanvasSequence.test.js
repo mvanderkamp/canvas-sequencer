@@ -108,7 +108,7 @@ describe('CanvasSequence', () => {
 
   describe('[@@fromJSON](data)', () => {
     const fromJSON = Symbol.for('fromJSON');
-    const sequence = Symbol.for('fromJSON');
+    const sequence = Symbol.for('sequence');
 
     const cs = new CanvasSequence();
     cs.fillStyle = 'blue';
