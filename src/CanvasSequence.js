@@ -31,7 +31,7 @@ const locals = Object.freeze({
     'putImageData',
     'quadraticCurveTo',
     'rect',
-    'removeHitREgion',
+    'removeHitRegion',
     'resetTransform',
     'restore',
     'rotate',
