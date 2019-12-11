@@ -207,6 +207,7 @@ to make sure this can happen.
 
 ## Changes
 
+- __3.0.6__ Fix typo in new instruction support
 - __3.0.5__ Slight performance improvement, fixed a buggy test, added support
   for some newer experimental instructions.
 - __3.0.4__ Added badges, fixed up the README a bit.
