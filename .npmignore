@@ -16,4 +16,5 @@ tests
 Makefile
 .eslintrc.json
 .ignore
+.coveralls.yml
 
