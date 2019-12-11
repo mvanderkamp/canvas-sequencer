@@ -17,3 +17,6 @@ tags
 # test coverage
 coverage
 
+# coveralls tokens
+.coveralls.yml
+

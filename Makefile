@@ -8,11 +8,14 @@ lint:
 fix:
 	npx eslint index.js src tests --fix;
 
-release: lint build tags
+release: lint build coveralls tags
 
 build:
 	npx parcel build index.js
 
 tags:
 	ctags -R src
+
+coveralls:
+	npm run coveralls
 
