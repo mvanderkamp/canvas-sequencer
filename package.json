@@ -32,11 +32,11 @@
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "coveralls": "^3.0.9",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "coveralls": "^3.0.11",
     "eslint": "^6.8.0",
-    "jest": "^24.9.0",
+    "jest": "^25.3.0",
     "parcel-bundler": "^1.12.4"
   },
   "scripts": {
