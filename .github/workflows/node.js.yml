@@ -9,7 +9,7 @@ on:
   pull_request: null
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
