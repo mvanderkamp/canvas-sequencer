@@ -1,17 +1,8 @@
 # canvas-sequencer
 
-[![Maintainability](
-https://api.codeclimate.com/v1/badges/777e9d732d4ceece8124/maintainability)
-](https://codeclimate.com/github/mvanderkamp/canvas-sequencer/maintainability)
-[![Coverage Status](
-https://coveralls.io/repos/github/mvanderkamp/canvas-sequencer/badge.svg?branch=master)
-](https://coveralls.io/github/mvanderkamp/canvas-sequencer?branch=master)
-[![Build Status](
-https://travis-ci.org/mvanderkamp/canvas-sequencer.svg?branch=master)
-](https://travis-ci.org/mvanderkamp/canvas-sequencer)
-[![devDependencies Status](
-https://david-dm.org/mvanderkamp/canvas-sequencer/dev-status.svg)
-](https://david-dm.org/mvanderkamp/canvas-sequencer?type=dev)
+[![Node.js CI](https://github.com/mvanderkamp/canvas-sequencer/actions/workflows/node.js.yml/badge.svg)](https://github.com/mvanderkamp/canvas-sequencer/actions/workflows/node.js.yml)
+[![Coverage Status](https://coveralls.io/repos/github/mvanderkamp/canvas-sequencer/badge.svg?branch=master)](https://coveralls.io/github/mvanderkamp/canvas-sequencer?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/777e9d732d4ceece8124/maintainability)](https://codeclimate.com/github/mvanderkamp/canvas-sequencer/maintainability)
 
 Store, serialize, parse, and execute series of canvas context instructions!
 
