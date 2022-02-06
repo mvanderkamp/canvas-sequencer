@@ -19,4 +19,4 @@ coverage
 
 # coveralls tokens
 .coveralls.yml
-
+.parcel-cache/

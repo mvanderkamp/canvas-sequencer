@@ -1,10 +1,374 @@
-parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcelRequire,u="function"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i="function"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&"string"==typeof t)return u(t);var c=new Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this)}return r[t].exports;function p(e){return f(p.resolve(e))}}f.isParcelRequire=!0,f.Module=function(e){this.id=e,this.bundle=f,this.exports={}},f.modules=e,f.cache=r,f.parent=o,f.register=function(r,t){e[r]=[function(e,r){r.exports=t},{}]};for(var c=0;c<t.length;c++)try{f(t[c])}catch(e){i||(i=e)}if(t.length){var l=f(t[t.length-1]);"object"==typeof exports&&"undefined"!=typeof module?module.exports=l:"function"==typeof define&&define.amd?define(function(){return l}):n&&(this[n]=l)}if(parcelRequire=f,i)throw i;return f}({"QdEN":[function(require,module,exports) {
-"use strict";var t;function e(t,e){return o(t)||n(t,e)||r()}function r(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}function n(t,e){if(Symbol.iterator in Object(t)||"[object Arguments]"===Object.prototype.toString.call(t)){var r=[],n=!0,o=!1,i=void 0;try{for(var u,c=t[Symbol.iterator]();!(n=(u=c.next()).done)&&(r.push(u.value),!e||r.length!==e);n=!0);}catch(a){o=!0,i=a}finally{try{n||null==c.return||c.return()}finally{if(o)throw i}}return r}}function o(t){if(Array.isArray(t))return t}function i(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function u(t){return(u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function c(t){return l(t)||f(t)||a()}function a(){throw new TypeError("Invalid attempt to spread non-iterable instance")}function f(t){if(Symbol.iterator in Object(t)||"[object Arguments]"===Object.prototype.toString.call(t))return Array.from(t)}function l(t){if(Array.isArray(t)){for(var e=0,r=new Array(t.length);e<t.length;e++)r[e]=t[e];return r}}function s(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}function y(t,e,r){return e&&s(t.prototype,e),r&&s(t,r),t}function p(t,e){return!e||"object"!==u(e)&&"function"!=typeof e?b(t):e}function b(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function h(t){return(h=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function O(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&m(t,e)}function m(t,e){return(m=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function v(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}var g={METHOD:"method",PROPERTY:"property"},w=function t(e,r){v(this,t),this.inst=e,this.args=r},j=function(t){function e(t,r){var n;return v(this,e),(n=p(this,h(e).call(this,t,r))).type=g.METHOD,n}return O(e,w),y(e,[{key:"execute",value:function(t){t[this.inst].apply(t,c(this.args))}}]),e}(),d=function(t){function e(t,r){var n;return v(this,e),(n=p(this,h(e).call(this,t,r))).type=g.PROPERTY,n}return O(e,w),y(e,[{key:"execute",value:function(t){t[this.inst]=this.args[0]}}]),e}(),P=(i(t={},g.METHOD,j),i(t,g.PROPERTY,d),t),E=function t(e,r,n){return v(this,t),new P[e](r,n)};Object.entries(g).forEach(function(t){var r=e(t,2),n=r[0],o=r[1];Object.defineProperty(E,n,{value:o,configurable:!1,enumerable:!0,writable:!1})}),module.exports=E;
-},{}],"o5nZ":[function(require,module,exports) {
-"use strict";function e(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function t(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}function n(e,n,o){return n&&t(e.prototype,n),o&&t(e,o),e}var o=require("./CanvasAtom.js"),r=Object.freeze({METHODS:["addHitRegion","arc","arcTo","beginPath","bezierCurveTo","clearHitRegions","clearRect","clip","closePath","drawFocusIfNeeded","drawImage","ellipse","fill","fillRect","fillText","lineTo","moveTo","putImageData","quadraticCurveTo","rect","removeHitRegion","resetTransform","restore","rotate","save","scale","scrollPathIntoView","setLineDash","setTransform","stroke","strokeRect","strokeText","transform","translate"],PROPERTIES:["direction","fillStyle","filter","font","globalAlpha","globalCompositeOperation","imageSmoothingEnabled","imageSmoothingQuality","lineCap","lineDashOffset","lineJoin","lineWidth","miterLimit","shadowBlur","shadowColor","shadowOffsetX","shadowOffsetY","strokeStyle","textAlign","textBaseline"]}),a=Object.freeze({sequence:Symbol.for("sequence"),push:Symbol.for("push"),fromJSON:Symbol.for("fromJSON")}),i=function(){function t(){var n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;e(this,t),this[a.sequence]=[],n&&this[a.fromJSON](n)}return n(t,[{key:a.fromJSON,value:function(){var e=this;(arguments.length>0&&void 0!==arguments[0]?arguments[0]:{sequence:[]}).sequence.forEach(function(t){var n=t.type,o=t.inst,r=t.args;e[a.push](n,o,r)})}},{key:a.push,value:function(e,t,n){this[a.sequence].push(new o(e,t,n))}},{key:"execute",value:function(e){e.save(),this[a.sequence].forEach(function(t){return t.execute(e)}),e.restore()}},{key:"toJSON",value:function(){return{sequence:this[a.sequence]}}}]),t}();r.METHODS.forEach(function(e){Object.defineProperty(i.prototype,e,{value:function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];this[a.push](o.METHOD,e,n)},writable:!1,enumerable:!0,configurable:!1})}),r.PROPERTIES.forEach(function(e){Object.defineProperty(i.prototype,e,{get:function(){throw"Invalid canvas sequencer interaction, cannot get ".concat(e,".")},set:function(t){this[a.push](o.PROPERTY,e,[t])},enumerable:!0,configurable:!1})}),module.exports=i;
-},{"./CanvasAtom.js":"QdEN"}],"kmo7":[function(require,module,exports) {
-"use strict";function e(t){return(e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(t)}function t(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function n(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function r(e,t,r){return t&&n(e.prototype,t),r&&n(e,r),e}function o(t,n){return!n||"object"!==e(n)&&"function"!=typeof n?u(t):n}function u(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function i(e){return(i=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function c(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&f(e,t)}function f(e,t){return(f=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}var a=require("./CanvasSequence.js"),p=Object.freeze({sequence:Symbol.for("sequence"),push:Symbol.for("push")});function s(e,t){var n=e.replace(/^\{|\}$/g,"");return n!==e?t.hasOwnProperty(n)?t[n]:n:e}var l=function(e){function n(){return t(this,n),o(this,i(n).apply(this,arguments))}return c(n,a),r(n,[{key:"build",value:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=new a;return this[p.sequence].forEach(function(n){var r=n.type,o=n.inst,u=n.args.map(function(t){return"string"==typeof t?s(t,e):t});t[p.push](r,o,u)}),t}},{key:"execute",value:function(){throw new TypeError("Cannot execute a blueprint.")}}]),n}();module.exports=l;
-},{"./CanvasSequence.js":"o5nZ"}],"Focm":[function(require,module,exports) {
-"use strict";var e=require("./src/CanvasSequence.js"),r=require("./src/CanvasBlueprint.js");module.exports={CanvasSequence:e,CanvasBlueprint:r};
-},{"./src/CanvasSequence.js":"o5nZ","./src/CanvasBlueprint.js":"kmo7"}]},{},["Focm"], null)
-//# sourceMappingURL=/index.js.map
+/*
+ * Access point for npm.
+ */ 'use strict';
+var $663f930907ca9f24$exports = {};
+/*
+ * Author: Michael van der Kamp
+ * Date: July/August, 2018
+ *
+ * This file provides the definition of the CanvasSequence class.
+ */ 'use strict';
+var $9a8fdc9f7382f5d6$exports = {};
+/*
+ * Author: Michael van der Kamp
+ * Date: July/August, 2018
+ *
+ * This file defines the low level 'CanvasAtom' for use by a CanvasSequence.
+ *
+ * A CanvasAtom is a unit of execution in a CanvasSequence. It comes in two
+ * flavours: one for describing a method call, one for describing a property
+ * assignment.
+ */ 'use strict';
+/**
+ * The types of CanvasAtoms that are available.
+ *
+ * @enum {string}
+ * @readonly
+ * @lends CanvasAtom
+ */ const $9a8fdc9f7382f5d6$var$TYPES = {
+    /** @const */ METHOD: 'method',
+    /** @const */ PROPERTY: 'property'
+};
+/**
+ * Internal common constructor definition for Canvas Atoms.
+ *
+ * @param {string} inst - The canvas context instruction.
+ * @param {*[]} args - The arguments to the instruction.
+ */ class $9a8fdc9f7382f5d6$var$Atom {
+    constructor(inst, args){
+        /**
+     * The canvas context instruction.
+     *
+     * @private
+     * @type {string}
+     */ this.inst = inst;
+        /**
+     * The arguments to the instruction.
+     *
+     * @private
+     * @type {*[]}
+     */ this.args = args;
+    }
+}
+/**
+ * A MethodCanvasAtom is used for canvas context methods. The arguments will be
+ * treated as an actual array, all of which will be passed to the method when
+ * the atom is executed.
+ *
+ * @extends Atom
+ */ class $9a8fdc9f7382f5d6$var$MethodCanvasAtom extends $9a8fdc9f7382f5d6$var$Atom {
+    constructor(inst, args){
+        super(inst, args);
+        /**
+     * The type of atom.
+     *
+     * @private
+     * @type {string}
+     */ this.type = $9a8fdc9f7382f5d6$var$TYPES.METHOD;
+    }
+    /**
+   * Execute the atom on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */ execute(context) {
+        context[this.inst](...this.args);
+    }
+}
+/**
+ * A PropertyCanvasAtom is used for canvas context properties (a.k.a. fields).
+ * Only the first argument will be used, and will be the value assigned to the
+ * field.
+ *
+ * @extends Atom
+ */ class $9a8fdc9f7382f5d6$var$PropertyCanvasAtom extends $9a8fdc9f7382f5d6$var$Atom {
+    constructor(inst, args){
+        super(inst, args);
+        this.type = $9a8fdc9f7382f5d6$var$TYPES.PROPERTY;
+    }
+    /**
+   * Execute the atom on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */ execute(context) {
+        context[this.inst] = this.args[0];
+    }
+}
+/*
+ * This object is for demultiplexing types in the CanvasAtom constructor.
+ * Defined outside the constructor so it doesn't need to be redefined every
+ * time a new atom is constructed. Defined outside the class so that it is not
+ * externally exposed.
+ */ const $9a8fdc9f7382f5d6$var$atomOf = {
+    [$9a8fdc9f7382f5d6$var$TYPES.METHOD]: $9a8fdc9f7382f5d6$var$MethodCanvasAtom,
+    [$9a8fdc9f7382f5d6$var$TYPES.PROPERTY]: $9a8fdc9f7382f5d6$var$PropertyCanvasAtom
+};
+/**
+ * The exposed CanvasAtom class. Results in the instantiation of either a
+ * MethodCanvasAtom or a PropertyCanvasAtom, depending on the given type.
+ *
+ * @param {string} type - Either CanvasAtom.METHOD or CanvasAtom.PROPERTY.
+ * @param {string} inst - The canvas context instruction.
+ * @param {*[]} args - The arguments to the instruction.
+ */ class $9a8fdc9f7382f5d6$var$CanvasAtom {
+    constructor(type, inst, args){
+        return new $9a8fdc9f7382f5d6$var$atomOf[type](inst, args);
+    }
+}
+/*
+ * Define the types once locally, but make them available externally as
+ * immutable properties on the class.
+ */ Object.entries($9a8fdc9f7382f5d6$var$TYPES).forEach(([p, v])=>{
+    Object.defineProperty($9a8fdc9f7382f5d6$var$CanvasAtom, p, {
+        value: v,
+        configurable: false,
+        enumerable: true,
+        writable: false
+    });
+});
+$9a8fdc9f7382f5d6$exports = $9a8fdc9f7382f5d6$var$CanvasAtom;
+
+
+const $663f930907ca9f24$var$locals = Object.freeze({
+    METHODS: [
+        'addHitRegion',
+        'arc',
+        'arcTo',
+        'beginPath',
+        'bezierCurveTo',
+        'clearHitRegions',
+        'clearRect',
+        'clip',
+        'closePath',
+        'drawFocusIfNeeded',
+        'drawImage',
+        'ellipse',
+        'fill',
+        'fillRect',
+        'fillText',
+        'lineTo',
+        'moveTo',
+        'putImageData',
+        'quadraticCurveTo',
+        'rect',
+        'removeHitRegion',
+        'resetTransform',
+        'restore',
+        'rotate',
+        'save',
+        'scale',
+        'scrollPathIntoView',
+        'setLineDash',
+        'setTransform',
+        'stroke',
+        'strokeRect',
+        'strokeText',
+        'transform',
+        'translate', 
+    ],
+    PROPERTIES: [
+        'direction',
+        'fillStyle',
+        'filter',
+        'font',
+        'globalAlpha',
+        'globalCompositeOperation',
+        'imageSmoothingEnabled',
+        'imageSmoothingQuality',
+        'lineCap',
+        'lineDashOffset',
+        'lineJoin',
+        'lineWidth',
+        'miterLimit',
+        'shadowBlur',
+        'shadowColor',
+        'shadowOffsetX',
+        'shadowOffsetY',
+        'strokeStyle',
+        'textAlign',
+        'textBaseline', 
+    ]
+});
+// Mark properties as intended for internal use.
+const $663f930907ca9f24$var$symbols = Object.freeze({
+    sequence: Symbol.for('sequence'),
+    push: Symbol.for('push'),
+    fromJSON: Symbol.for('fromJSON')
+});
+/**
+ * A CanvasSequence is a linear collection of CanvasAtoms, capable of being
+ * executed on a CanvasRenderingContext2D.
+ *
+ * @param {CanvasSequence} [data=null] - An unrevived (i.e. freshly transmitted)
+ * CanvasSequence. If present, the constructor revives the sequence. Note that
+ * an already revived CanvasSequence cannot be used as the argument here.
+ */ class $663f930907ca9f24$var$CanvasSequence {
+    constructor(data = null){
+        /**
+     * The CanvasAtoms that form the sequence.
+     *
+     * @private
+     * @type {CanvasAtom[]}
+     */ this[$663f930907ca9f24$var$symbols.sequence] = [];
+        // If data is present, assume it is a CanvasSequence that needs reviving.
+        if (data) this[$663f930907ca9f24$var$symbols.fromJSON](data);
+    }
+    /**
+   * Revive the sequence from transmitted JSON data.
+   *
+   * @private
+   * @param {CanvasSequence} [data={}]
+   */ [$663f930907ca9f24$var$symbols.fromJSON](data = {
+        sequence: []
+    }) {
+        data.sequence.forEach(({ type: type , inst: inst , args: args  })=>{
+            this[$663f930907ca9f24$var$symbols.push](type, inst, args);
+        });
+    }
+    /**
+   * Push a new CanvasAtom onto the end of the sequence.
+   *
+   * @private
+   * @param {string} type - The type of CanvasAtom to push.
+   * @param {string} inst - The canvas context instruction.
+   * @param {*[]} args - The arguments to the canvas context instruction.
+   */ [$663f930907ca9f24$var$symbols.push](type, inst, args) {
+        this[$663f930907ca9f24$var$symbols.sequence].push(new $9a8fdc9f7382f5d6$exports(type, inst, args));
+    }
+    /**
+   * Execute the sequence on the given context.
+   *
+   * @param {CanvasRenderingContext2D} context
+   */ execute(context) {
+        context.save();
+        this[$663f930907ca9f24$var$symbols.sequence].forEach((a)=>a.execute(context)
+        );
+        context.restore();
+    }
+    /**
+   * Export a JSON serialized version of the sequence, ready for transmission.
+   *
+   * @return {CanvasSequence} In JSON serialized form.
+   */ toJSON() {
+        return {
+            sequence: this[$663f930907ca9f24$var$symbols.sequence]
+        };
+    }
+}
+$663f930907ca9f24$var$locals.METHODS.forEach((m)=>{
+    Object.defineProperty($663f930907ca9f24$var$CanvasSequence.prototype, m, {
+        value: function pushMethodCall(...args) {
+            this[$663f930907ca9f24$var$symbols.push]($9a8fdc9f7382f5d6$exports.METHOD, m, args);
+        },
+        writable: false,
+        enumerable: true,
+        configurable: false
+    });
+});
+$663f930907ca9f24$var$locals.PROPERTIES.forEach((p)=>{
+    Object.defineProperty($663f930907ca9f24$var$CanvasSequence.prototype, p, {
+        get () {
+            throw `Invalid canvas sequencer interaction, cannot get ${p}.`;
+        },
+        set (v) {
+            this[$663f930907ca9f24$var$symbols.push]($9a8fdc9f7382f5d6$exports.PROPERTY, p, [
+                v
+            ]);
+        },
+        enumerable: true,
+        configurable: false
+    });
+});
+$663f930907ca9f24$exports = $663f930907ca9f24$var$CanvasSequence;
+
+
+var $4fabbdeef1f2d4ae$exports = {};
+/*
+ * Author: Michael van der Kamp
+ * Date: July/August, 2018
+ *
+ * Thie file provides the definition of the CanvasBlueprint class.
+ *
+ * A CanvasBlueprint is similar to a plain CanvasSequence, except that it
+ * accepts tag strings as arguments, and before it can be executed it  needs to
+ * be 'built' with an object defining which values should replace the tags.
+ */ 'use strict';
+
+// Mark properties as intended for internal use.
+const $4fabbdeef1f2d4ae$var$symbols = Object.freeze({
+    sequence: Symbol.for('sequence'),
+    push: Symbol.for('push')
+});
+/**
+ * Replace tags in the given string with correlated value in values.
+ *
+ * Rules:
+ * - Strings not surrounded by curly braces {} will be returned.
+ * - Strings surrounded by curly braces but not corresponding to a property on
+ *   'values' will result in a string without the curly braces being returned.
+ * - Strings surrounded by curly braces, with the inner string corresponding to
+ *   a property on 'values' will result in the corresponding value being
+ *   returned.
+ *
+ * @inner
+ * @private
+ *
+ * @param {string} str
+ * @param {object} values
+ *
+ * @return {string|mixed} Either the original string if no replacement was
+ * performed, or the appropriate value.
+ */ function $4fabbdeef1f2d4ae$var$replaceTags(str, values) {
+    const tag = str.replace(/^\{|\}$/gu, '');
+    if (tag !== str) return values.hasOwnProperty(tag) ? values[tag] : tag;
+    return str;
+}
+/**
+ * A CanvasBlueprint is a rebuildable CanvasSequence. It accepts tagged
+ * arguments. When built, tags will be replaced using properties from a provided
+ * object.
+ *
+ * @extends CanvasSequence
+ */ class $4fabbdeef1f2d4ae$var$CanvasBlueprint extends $663f930907ca9f24$exports {
+    /**
+   * Build the blueprint using the provided values.
+   *
+   * Rules:
+   * - Strings not surrounded by curly braces {} will be returned.
+   * - Strings surrounded by curly braces but not corresponding to a property on
+   *   'values' will result in a string without the curly braces being returned.
+   * - Strings surrounded by curly braces, with the inner string corresponding
+   *   to a property on 'values' will result in the corresponding value being
+   *   returned.
+   *
+   * @param {object} values - The values with which to construct the sequence.
+   *
+   * @return {CanvasSequence} The constructed sequence.
+   */ build(values = {
+    }) {
+        const seq = new $663f930907ca9f24$exports();
+        this[$4fabbdeef1f2d4ae$var$symbols.sequence].forEach(({ type: type , inst: inst , args: args  })=>{
+            const realArgs = args.map((v)=>{
+                return typeof v === 'string' ? $4fabbdeef1f2d4ae$var$replaceTags(v, values) : v;
+            });
+            seq[$4fabbdeef1f2d4ae$var$symbols.push](type, inst, realArgs);
+        });
+        return seq;
+    }
+    /**
+   * CanvasBlueprints cannot be directly executed!
+   *
+   * @throws TypeError
+   */ execute() {
+        throw new TypeError('Cannot execute a blueprint.');
+    }
+}
+$4fabbdeef1f2d4ae$exports = $4fabbdeef1f2d4ae$var$CanvasBlueprint;
+
+
+module.exports = {
+    CanvasSequence: $663f930907ca9f24$exports,
+    CanvasBlueprint: $4fabbdeef1f2d4ae$exports
+};
+
+
+//# sourceMappingURL=index.js.map

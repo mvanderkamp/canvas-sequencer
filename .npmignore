@@ -17,4 +17,4 @@ Makefile
 .eslintrc.json
 .ignore
 .coveralls.yml
-
+.parcel-cache/

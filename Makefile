@@ -11,7 +11,7 @@ fix:
 release: lint build coveralls tags
 
 build:
-	npx parcel build index.js
+	npm run build
 
 tags:
 	ctags -R src
