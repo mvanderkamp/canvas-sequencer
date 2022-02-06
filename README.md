@@ -204,6 +204,7 @@ to make sure this can happen.
 
 ## Changes
 
+- __3.1.0__ Switch from parcel-bunlder to parcel for distribution, add github CI
 - __3.0.6__ Fix typo in new instruction support
 - __3.0.5__ Slight performance improvement, fixed a buggy test, added support
   for some newer experimental instructions.
