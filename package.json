@@ -32,21 +32,28 @@
     "url": "https://github.com/mvanderkamp/canvas-sequencer/issues"
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
-  "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "coveralls": "^3.1.0",
-    "eslint": "^7.19.0",
-    "jest": "^26.6.3",
-    "parcel": "^2.2.1"
-  },
   "scripts": {
-    "build": "PARCEL_WORKER_BACKEND=process parcel build",
+    "build": "parcel build --no-source-maps",
+    "build:debug": "parcel build --no-optimize",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "lint": "eslint index.js src tests",
+    "lint:fix": "eslint index.js src tests --fix",
+    "prepare": "npm run build",
+    "release": "npm run lint && npm test && npm run build && npm run coveralls",
     "test": "jest",
-    "test:debug": "node inspect $(npm bin)/jest --runInBand",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
   "jest": {
-    "testURL": "http://localhost/"
+    "testEnvironmentOptions": {
+        "url": "http://localhost/"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "coveralls-next": "^4.2.0",
+    "eslint": "^8.53.0",
+    "jest": "^29.7.0",
+    "parcel": "^2.10.2"
   }
 }
