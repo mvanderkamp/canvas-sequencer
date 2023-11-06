@@ -43,7 +43,9 @@
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
   "jest": {
-    "testURL": "http://localhost/"
+    "testEnvironmentOptions": {
+        "url": "http://localhost/"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
