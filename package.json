@@ -33,10 +33,14 @@
   },
   "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
   "scripts": {
-    "build": "PARCEL_WORKER_BACKEND=process parcel build",
+    "build": "parcel build",
+    "build:debug": "parcel build --no-optimize",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "lint": "eslint index.js src tests",
+    "lint:fix": "eslint index.js src tests --fix",
+    "release": "npm run lint && npm test && npm run build && npm run coveralls",
     "test": "jest",
-    "test:debug": "node inspect $(npm bin)/jest --runInBand",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
   "jest": {
     "testURL": "http://localhost/"
