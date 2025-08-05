@@ -35,6 +35,7 @@
   "scripts": {
     "build": "parcel build --no-source-maps",
     "build:debug": "parcel build --no-optimize",
+    "clean": "rm -rf dist",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint index.js src tests",
     "lint:fix": "eslint index.js src tests --fix",
