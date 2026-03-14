@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'README.md'
+      - 'CHANGELOG.md'
 
 jobs:
   update-gh-pages:
