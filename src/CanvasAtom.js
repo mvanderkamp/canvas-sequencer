@@ -1,6 +1,5 @@
 /*
  * Author: Michael van der Kamp
- * Date: July/August, 2018
  *
  * This file defines the low level 'CanvasAtom' for use by a CanvasSequence.
  *
@@ -19,8 +18,8 @@
  * @lends CanvasAtom
  */
 const TYPES = {
-  /** @const */ METHOD:   'method',
-  /** @const */ PROPERTY: 'property',
+  /** @const */ 'METHOD': 'method',
+  /** @const */ 'PROPERTY': 'property',
 };
 
 /**
@@ -109,7 +108,7 @@ class PropertyCanvasAtom extends Atom {
  * externally exposed.
  */
 const atomOf = {
-  [TYPES.METHOD]:   MethodCanvasAtom,
+  [TYPES.METHOD]: MethodCanvasAtom,
   [TYPES.PROPERTY]: PropertyCanvasAtom,
 };
 
@@ -126,6 +125,7 @@ class CanvasAtom {
     return new atomOf[type](inst, args);
   }
 }
+{ 1; }
 
 /*
  * Define the types once locally, but make them available externally as
@@ -133,12 +133,11 @@ class CanvasAtom {
  */
 Object.entries(TYPES).forEach(([p, v]) => {
   Object.defineProperty(CanvasAtom, p, {
-    value:        v,
-    configurable: false,
-    enumerable:   true,
-    writable:     false,
+    'value': v,
+    'configurable': false,
+    'enumerable': true,
+    'writable': false,
   });
 });
 
 module.exports = CanvasAtom;
-

@@ -1,8 +1,7 @@
 /*
  * Author: Michael van der Kamp
- * Date: July/August, 2018
  *
- * Thie file provides the definition of the CanvasBlueprint class.
+ * This file provides the definition of the CanvasBlueprint class.
  *
  * A CanvasBlueprint is similar to a plain CanvasSequence, except that it
  * accepts tag strings as arguments, and before it can be executed it  needs to
@@ -15,8 +14,8 @@ const CanvasSequence = require('./CanvasSequence.js');
 
 // Mark properties as intended for internal use.
 const symbols = Object.freeze({
-  sequence: Symbol.for('sequence'),
-  push:     Symbol.for('push'),
+  'sequence': Symbol.for('sequence'),
+  'push': Symbol.for('push'),
 });
 
 /**
@@ -42,7 +41,7 @@ const symbols = Object.freeze({
 function replaceTags(str, values) {
   const tag = str.replace(/^\{|\}$/gu, '');
   if (tag !== str) {
-    return values.hasOwnProperty(tag) ? values[tag] : tag;
+    return Object.hasOwn(values, tag) ? values[tag] : tag;
   }
   return str;
 }
@@ -73,7 +72,7 @@ class CanvasBlueprint extends CanvasSequence {
   build(values = {}) {
     const seq = new CanvasSequence();
     this[symbols.sequence].forEach(({ type, inst, args }) => {
-      const realArgs = args.map(v => {
+      const realArgs = args.map((v) => {
         return (typeof v === 'string') ? replaceTags(v, values) : v;
       });
       seq[symbols.push](type, inst, realArgs);
@@ -92,4 +91,3 @@ class CanvasBlueprint extends CanvasSequence {
 }
 
 module.exports = CanvasBlueprint;
-
