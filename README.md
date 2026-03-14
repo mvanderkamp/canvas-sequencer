@@ -13,7 +13,7 @@ Store, serialize, parse, and execute series of canvas context instructions!
 * [CanvasSequence API](#canvassequence-api)
 * [CanvasBlueprint](#canvasblueprint-api)
 * [Limitations](#limitations)
-* [What's new in 2.0](#changes)
+* [Resources](#resources)
 
 ## Why
 
@@ -202,23 +202,6 @@ Also be warned that I have not yet fully tested the API with complex arguments,
 for example Path objects. I suspect the library will need a bit of fine tuning
 to make sure this can happen.
 
-## Changes
+## Resources
 
-- __3.1.0__ Switch from parcel-bunlder to parcel for distribution, add github CI
-- __3.0.6__ Fix typo in new instruction support
-- __3.0.5__ Slight performance improvement, fixed a buggy test, added support
-  for some newer experimental instructions.
-- __3.0.4__ Added badges, fixed up the README a bit.
-- __3.0.3__ Fixed a minor bug in the CanvasSequence class, improved test
-  coverage, update dependencies.
-- __3.0.2__ Switched to `parcel-bundler` for the bundle. Simpler to use, more
-  efficient.
-- __3.0.1__ Added babelify transform for the bundle.
-- CanvasSequencer was renamed to CanvasSequence.
-- Internal documentation was added.
-
-## Future Work
-
-At some point I will get around to testing the API with complex arguments (e.g.
-`Path` objects).
-
+* [Changelog](./CHANGELOG.md) — Detailed list of changes and version history.
