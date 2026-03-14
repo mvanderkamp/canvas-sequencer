@@ -9,6 +9,7 @@ Store, serialize, parse, and execute series of canvas context instructions!
 ## Contents
 
 * [Why](#why)
+* [Installation](#installation)
 * [Importing](#importing)
 * [CanvasSequence API](#canvassequence-api)
 * [CanvasBlueprint](#canvasblueprint-api)
@@ -32,6 +33,14 @@ With `canvas-sequencer` you can package those instructions up in a sequence and
 transmit them. Once on the client side, you can unpack the instructions and
 execute them on any given context (or even multiple contexts), and all the
 issues with the `eval()` technique fade away.
+
+## Installation
+
+Install via [npm](https://www.npmjs.com/package/canvas-sequencer):
+
+```bash
+npm install canvas-sequencer
+```
 
 ## Importing:
 
