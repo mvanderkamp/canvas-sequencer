@@ -1,0 +1,31 @@
+---
+name: Update gh-pages
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README.md'
+
+jobs:
+  update-gh-pages:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+
+      - name: Copy README.md from main
+        run: git checkout origin/main -- README.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || (git commit -m "Update README.md from main" && git push)
