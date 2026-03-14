@@ -128,5 +128,3 @@ describe('CanvasSequence', () => {
     });
   });
 });
-
-

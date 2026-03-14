@@ -46,16 +46,16 @@ describe('CanvasBlueprint', () => {
     bp.font = '2.5em monospace';
     bp.lineWidth = 8;
 
-    const values = { x: 250, y: 99 };
+    const values = { 'x': 250, 'y': 99 };
     const ctx = {
-      save:       jest.fn(),
-      restore:    jest.fn(),
-      fillRect:   jest.fn(),
-      moveTo:     jest.fn(),
-      lineWidth:  1,
-      font:       '16px serif',
-      fillText:   jest.fn(),
-      strokeText: jest.fn(),
+      'save': jest.fn(),
+      'restore': jest.fn(),
+      'fillRect': jest.fn(),
+      'moveTo': jest.fn(),
+      'lineWidth': 1,
+      'font': '16px serif',
+      'fillText': jest.fn(),
+      'strokeText': jest.fn(),
     };
 
     test('Produces a CanvasSequence', () => {
@@ -92,7 +92,7 @@ describe('CanvasBlueprint', () => {
     });
 
     test('Can be rebuilt correctly', () => {
-      const values = { x: 101, y: 42 };
+      const values = { 'x': 101, 'y': 42 };
       expect(() => bp.build(values).execute(ctx)).not.toThrow();
       expect(ctx.fillRect).toHaveBeenLastCalledWith(values.x, values.y, 30, 40);
     });
@@ -136,5 +136,3 @@ describe('CanvasBlueprint', () => {
     });
   });
 });
-
-

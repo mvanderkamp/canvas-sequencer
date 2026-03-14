@@ -1,6 +1,5 @@
 /*
  * Author: Michael van der Kamp
- * Date: July/August, 2018
  *
  * This file provides the definition of the CanvasSequence class.
  */
@@ -10,7 +9,7 @@
 const CanvasAtom = require('./CanvasAtom.js');
 
 const locals = Object.freeze({
-  METHODS: [
+  'METHODS': [
     'addHitRegion',
     'arc',
     'arcTo',
@@ -47,7 +46,7 @@ const locals = Object.freeze({
     'translate',
   ],
 
-  PROPERTIES: [
+  'PROPERTIES': [
     'direction',
     'fillStyle',
     'filter',
@@ -73,9 +72,9 @@ const locals = Object.freeze({
 
 // Mark properties as intended for internal use.
 const symbols = Object.freeze({
-  sequence: Symbol.for('sequence'),
-  push:     Symbol.for('push'),
-  fromJSON: Symbol.for('fromJSON'),
+  'sequence': Symbol.for('sequence'),
+  'push': Symbol.for('push'),
+  'fromJSON': Symbol.for('fromJSON'),
 });
 
 /**
@@ -97,7 +96,9 @@ class CanvasSequence {
     this[symbols.sequence] = [];
 
     // If data is present, assume it is a CanvasSequence that needs reviving.
-    if (data) this[symbols.fromJSON](data);
+    if (data) {
+      this[symbols.fromJSON](data);
+    }
   }
 
   /**
@@ -106,7 +107,7 @@ class CanvasSequence {
    * @private
    * @param {CanvasSequence} [data={}]
    */
-  [symbols.fromJSON](data = { sequence: [] }) {
+  [symbols.fromJSON](data = { 'sequence': [] }) {
     data.sequence.forEach(({ type, inst, args }) => {
       this[symbols.push](type, inst, args);
     });
@@ -141,29 +142,28 @@ class CanvasSequence {
    * @return {CanvasSequence} In JSON serialized form.
    */
   toJSON() {
-    return { sequence: this[symbols.sequence] };
+    return { 'sequence': this[symbols.sequence] };
   }
 }
 
-locals.METHODS.forEach(m => {
+locals.METHODS.forEach((m) => {
   Object.defineProperty(CanvasSequence.prototype, m, {
-    value: function pushMethodCall(...args) {
+    'value': function pushMethodCall(...args) {
       this[symbols.push](CanvasAtom.METHOD, m, args);
     },
-    writable:     false,
-    enumerable:   true,
-    configurable: false,
+    'writable': false,
+    'enumerable': true,
+    'configurable': false,
   });
 });
 
-locals.PROPERTIES.forEach(p => {
+locals.PROPERTIES.forEach((p) => {
   Object.defineProperty(CanvasSequence.prototype, p, {
-    get()  { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
+    get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
     set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, [v]); },
-    enumerable:   true,
-    configurable: false,
+    'enumerable': true,
+    'configurable': false,
   });
 });
 
 module.exports = CanvasSequence;
-
