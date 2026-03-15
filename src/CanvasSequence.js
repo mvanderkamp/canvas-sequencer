@@ -51,10 +51,14 @@ const locals = Object.freeze({
     'fillStyle',
     'filter',
     'font',
+    'fontKerning',
+    'fontStretch',
+    'fontVariantCaps',
     'globalAlpha',
     'globalCompositeOperation',
     'imageSmoothingEnabled',
     'imageSmoothingQuality',
+    'letterSpacing',
     'lineCap',
     'lineDashOffset',
     'lineJoin',
@@ -67,6 +71,8 @@ const locals = Object.freeze({
     'strokeStyle',
     'textAlign',
     'textBaseline',
+    'textRendering',
+    'wordSpacing',
   ],
 });
 
