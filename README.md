@@ -42,7 +42,7 @@ Install via [npm](https://www.npmjs.com/package/canvas-sequencer):
 npm install canvas-sequencer
 ```
 
-## Importing:
+## Importing
 
 Server side, or in a Node environment.
 
@@ -66,13 +66,13 @@ Client side, to access the bundled code in a script tag:
 
 ## CanvasSequence API
 
-### Creating a sequence:
+### Creating a sequence
 
 ```javascript
 const seq = new CanvasSequence();
 ```
 
-### Defining instructions:
+### Defining instructions
 
 You have access to the standard library of `CanvasRenderingContext2D`
 instructions, with the exception of access to the underlying `canvas` object,
@@ -102,7 +102,7 @@ serializable data.
 emitter.emit('new-sequence', seq);
 ```
 
-### Unpacking the sequence.
+### Unpacking the sequence
 
 The transmitted sequence needs to be revived in order for the CanvasSequence
 functionality to be available. This can be done by passing the transmitted data
@@ -113,7 +113,7 @@ object to the constructor:
 const seq = new CanvasSequence(data);
 ```
 
-### Executing the sequence.
+### Executing the sequence
 
 You can execute the sequence on any `CanvasRenderingContext2D` as such:
 
