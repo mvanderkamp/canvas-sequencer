@@ -20,6 +20,7 @@ jobs:
         with:
           ref: gh-pages
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Merge main into gh-pages
         run: |
