@@ -20,7 +20,7 @@ jobs:
         with:
           ref: gh-pages
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true # required for the `git push` step below
 
       - name: Merge main into gh-pages
         run: |
