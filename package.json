@@ -5,8 +5,10 @@
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "source": "index.js",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "files": [
-    "dist/index.js"
+    "dist/index.js",
+    "index.d.ts"
   ],
   "directories": {
     "test": "tests"
