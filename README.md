@@ -1,7 +1,7 @@
 # canvas-sequencer
 
 [![Node.js CI](https://github.com/mvanderkamp/canvas-sequencer/actions/workflows/node.js.yml/badge.svg)](https://github.com/mvanderkamp/canvas-sequencer/actions/workflows/node.js.yml)
-[![Coverage Status](https://coveralls.io/repos/github/mvanderkamp/canvas-sequencer/badge.svg?branch=master)](https://coveralls.io/github/mvanderkamp/canvas-sequencer?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/mvanderkamp/canvas-sequencer/badge.svg?branch=main)](https://coveralls.io/github/mvanderkamp/canvas-sequencer?branch=main)
 [![Maintainability](https://api.codeclimate.com/v1/badges/777e9d732d4ceece8124/maintainability)](https://codeclimate.com/github/mvanderkamp/canvas-sequencer/maintainability)
 
 Store, serialize, parse, and execute series of canvas context instructions!
