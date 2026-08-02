@@ -40,7 +40,7 @@
     "build:debug": "parcel build --no-optimize",
     "lint": "eslint index.js src tests",
     "lint:fix": "eslint index.js src tests --fix",
-    "test": "just",
+    "test": "jest",
     "test:coverage": "jest --coverage",
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
