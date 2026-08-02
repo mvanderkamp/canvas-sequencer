@@ -10,6 +10,9 @@
     "dist/index.js",
     "index.d.ts"
   ],
+  "targets": {
+    "types": false
+  },
   "directories": {
     "test": "tests"
   },
