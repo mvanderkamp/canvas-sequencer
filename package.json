@@ -51,7 +51,7 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/dist/",
-      "/test/"
+      "/tests/"
     ]
   },
   "devDependencies": {
