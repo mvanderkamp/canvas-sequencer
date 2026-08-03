@@ -44,6 +44,11 @@
     "test:coverage": "jest --coverage",
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
+  "targets": {
+    "main": {
+      "optimize": true
+    }
+  },
   "jest": {
     "testEnvironmentOptions": {
       "url": "http://localhost/"
