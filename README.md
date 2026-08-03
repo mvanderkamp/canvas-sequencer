@@ -213,4 +213,5 @@ to make sure this can happen.
 
 ## Resources
 
+* [Contributing guide](./CONTRIBUTING.md) — Development, pull request, and release instructions.
 * [Changelog](./CHANGELOG.md) — Detailed list of changes and version history.

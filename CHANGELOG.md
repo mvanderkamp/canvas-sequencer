@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 ### Added
 - CHANGELOG.md to track notable changes.
+- CONTRIBUTING.md with development, pull request, and release instructions.
 
 ### Changed
 - Updated dependencies and workflows.
