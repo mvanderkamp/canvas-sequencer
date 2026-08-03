@@ -45,7 +45,7 @@ Before opening a pull request, make sure:
 
 ## Release process
 
-For a package release, use the following workflow so the npm package is published from the same commit you tag, while only publishing the tag after `npm publish` succeeds.
+For a package release, use the following workflow so you publish from the same source commit you tag (with build artifacts generated locally), while only pushing the tag after `npm publish` succeeds.
 
 1. Update `package.json`, `package-lock.json`, and `CHANGELOG.md` for the new version.
 2. Commit the release preparation changes.
