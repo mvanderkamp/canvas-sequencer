@@ -47,27 +47,34 @@ Before opening a pull request, make sure:
 
 For a package release, use the following workflow so you publish from the same source commit you tag (with build artifacts generated locally), while only pushing the tag after `npm publish` succeeds.
 
-1. Update `package.json`, `package-lock.json`, and `CHANGELOG.md` for the new version.
-2. Commit the release preparation changes.
-3. Create the release tag locally, but do not push it yet.
-4. Build the package so `dist/index.js` exists in the publishable working tree.
-5. Check what will be published with `npm pack --dry-run`.
-6. Sanity-check the built bundle in `dist/index.js`.
-7. Publish the package to npm from the tagged commit.
-8. Push `main` and the tag.
-9. Create the GitHub release from the pushed tag.
+1. Create a release preparation branch from `main`.
+2. Update `package.json`, `package-lock.json`, and `CHANGELOG.md` for the new version.
+3. Commit the release preparation changes and open a pull request.
+4. Merge the pull request into `main`.
+5. Check out the merged `main` commit locally.
+6. Create the release tag locally for that commit, but do not push it yet.
+7. Build the package so `dist/index.js` exists in the publishable working tree.
+8. Check what will be published with `npm pack --dry-run`.
+9. Sanity-check the built bundle in `dist/index.js`.
+10. Publish the package to npm from the tagged commit.
+11. Push the tag.
+12. Create the GitHub release from the pushed tag.
 
 Example commands for `3.1.1`:
 
 ```bash
+git switch -c release/3.1.1
 git add package.json package-lock.json CHANGELOG.md
-git commit -m "Prepare 3.1.1 release"
+git commit -m "Prepare for 3.1.1 release"
+gh pr create
+# merge the PR, then sync your local main to the merged commit
+git switch main
+git pull --ff-only origin main
 git tag -a v3.1.1 -m "Release 3.1.1"
 npm run build
 npm pack --dry-run
 ls -lh dist/index.js
 npm publish
-git push origin main
 git push origin v3.1.1
 gh release create v3.1.1 --title "v3.1.1"
 ```
