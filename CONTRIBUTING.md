@@ -63,14 +63,14 @@ For a package release, use the following workflow so you publish from the same s
 Example commands for `3.1.1`:
 
 ```bash
-git switch -c release/3.1.1
+git switch --create release/3.1.1
 git add package.json package-lock.json CHANGELOG.md
-git commit -m "Prepare for 3.1.1 release"
+git commit --message "Prepare for 3.1.1 release"
 gh pr create
 # merge the PR, then sync your local main to the merged commit
 git switch main
 git pull --ff-only origin main
-git tag -a v3.1.1 -m "Release 3.1.1"
+git tag --annotate v3.1.1 --message "Release 3.1.1"
 npm run build
 npm pack --dry-run
 ls -lh dist/index.js
