@@ -1,6 +1,6 @@
 {
   "name": "canvas-sequencer",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Store, serialize, parse, and execute sequences of canvas context instructions.",
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "source": "index.js",
@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/mvanderkamp/canvas-sequencer/issues"
   },
-  "homepage": "https://github.com/mvanderkamp/canvas-sequencer#readme",
+  "homepage": "https://mvanderkamp.github.io/canvas-sequencer/",
   "scripts": {
     "build": "parcel build --no-source-maps",
     "build:debug": "parcel build --no-optimize",
