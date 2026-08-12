@@ -50,20 +50,6 @@ Server side, or in a Node environment.
 const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer');
 ```
 
-The code is also available pre-bundled, via `parcel-bundler`. You should
-probably create your own bundle though, so that you have control over browser
-targets, etc.
-
-```javascript
-const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer/dist');
-```
-
-Client side, to access the bundled code in a script tag:
-
-```html
-<script src="path/to/node_modules/canvas-sequencer/dist/index.js"></script>
-```
-
 ## CanvasSequence API
 
 ### Creating a sequence
