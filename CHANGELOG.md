@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.1.2] - 2026-08-11
+### Added
+- Added the MIT license to the project.
+
+### Changed
+- Updated ESLint, Jest, and Parcel development dependencies.
+- Simplified the internal organization of supported canvas instructions and
+  improved test isolation.
+
 ### Fixed
+- Corrected the npm homepage URL.
 - Removed unsupported direct script-tag usage of the CommonJS distribution
   bundle from the README.
 - Clarified the allowlisted `CanvasRenderingContext2D` instruction support in
