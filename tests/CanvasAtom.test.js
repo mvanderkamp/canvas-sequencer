@@ -16,8 +16,11 @@ describe('CanvasAtom', () => {
     const args = [1, 2, 3, 0, Math.PI];
 
     describe('constructor(type, inst, args)', () => {
-      test('Returns a valid object of correct type', () => {
+      test('creates a method atom', () => {
+        // Given
         const ca = new CanvasAtom(METHOD, 'arc', args);
+
+        // Then
         expect(ca.type).toEqual(METHOD);
         expect(ca.inst).toEqual('arc');
         expect(ca.args).toBeInstanceOf(Array);
@@ -26,13 +29,25 @@ describe('CanvasAtom', () => {
     });
 
     describe('execute(context)', () => {
-      const ctx = {};
-      ctx.arc = jest.fn();
-      const ca = new CanvasAtom(METHOD, 'arc', args);
-      test('Executes its method on the context', () => {
-        expect(() => ca.execute(ctx)).not.toThrow();
+      test('calls its method on the context', () => {
+        // Given
+        const ctx = { 'arc': jest.fn() };
+        const ca = new CanvasAtom(METHOD, 'arc', args);
+
+        // When
+        ca.execute(ctx);
+
+        // Then
         expect(ctx.arc).toHaveBeenCalledTimes(1);
         expect(ctx.arc).toHaveBeenLastCalledWith(...args);
+      });
+
+      test('throws when the context does not implement its method', () => {
+        // Given
+        const ca = new CanvasAtom(METHOD, 'arc', args);
+
+        // Then
+        expect(() => ca.execute({})).toThrow(TypeError);
       });
     });
   });
@@ -41,8 +56,11 @@ describe('CanvasAtom', () => {
     const args = ['12px serif'];
 
     describe('constructor(type, inst, args)', () => {
-      test('Returns a valid object of correct type', () => {
+      test('creates a property atom', () => {
+        // Given
         const ca = new CanvasAtom(PROPERTY, 'font', args);
+
+        // Then
         expect(ca.type).toEqual(PROPERTY);
         expect(ca.inst).toEqual('font');
         expect(ca.args).toBeInstanceOf(Array);
@@ -51,11 +69,15 @@ describe('CanvasAtom', () => {
     });
 
     describe('execute(context)', () => {
-      const ctx = {};
-      ctx.font = '10px sans-serif';
-      const ca = new CanvasAtom(PROPERTY, 'font', args);
-      test('Assigns its property on the context', () => {
-        expect(() => ca.execute(ctx)).not.toThrow();
+      test('assigns its property on the context', () => {
+        // Given
+        const ctx = { 'font': '10px sans-serif' };
+        const ca = new CanvasAtom(PROPERTY, 'font', args);
+
+        // When
+        ca.execute(ctx);
+
+        // Then
         expect(ctx.font).toBe(...args);
       });
     });
