@@ -13,6 +13,7 @@ Store, serialize, parse, and execute series of canvas context instructions!
 * [Importing](#importing)
 * [CanvasSequence API](#canvassequence-api)
 * [CanvasBlueprint](#canvasblueprint-api)
+* [Supported instructions](#supported-instructions)
 * [Limitations](#limitations)
 * [Resources](#resources)
 
@@ -60,11 +61,11 @@ const seq = new CanvasSequence();
 
 ### Defining instructions
 
-You have access to the standard library of `CanvasRenderingContext2D`
-instructions, with the exception of access to the underlying `canvas` object,
-for safety reasons. You can access these instructions just as you would with a
-normal `CanvasRenderingContext2D` object. Each instruction will be added onto
-the end of the sequence.
+You have access to a curated, allowlisted subset of
+`CanvasRenderingContext2D` instructions. It includes replayable command methods
+and writable rendering-state properties, but excludes the underlying `canvas`
+object for safety. Each instruction will be added onto the end of the sequence.
+See [Supported instructions](#supported-instructions) for the complete list.
 
 ```javascript
 seq.beginPath();
@@ -184,6 +185,81 @@ Unpacking:
 ```javascript
 const bp = new CanvasBlueprint(data);
 ```
+
+## Supported instructions
+
+`CanvasSequence` supports only the methods and writable properties below.
+Methods that return data or canvas-bound resources, such as `measureText()`,
+`getImageData()`, and `createLinearGradient()`, are intentionally unavailable
+because a sequence cannot usefully serialize or replay their return values.
+Query-style APIs and the underlying `canvas` object are also unavailable.
+
+### Supported API
+
+| Type | Instruction |
+| --- | --- |
+| Method | `addHitRegion()` |
+| Method | `arc()` |
+| Method | `arcTo()` |
+| Method | `beginPath()` |
+| Method | `bezierCurveTo()` |
+| Method | `clearHitRegions()` |
+| Method | `clearRect()` |
+| Method | `clip()` |
+| Method | `closePath()` |
+| Method | `drawFocusIfNeeded()` |
+| Method | `drawImage()` |
+| Method | `ellipse()` |
+| Method | `fill()` |
+| Method | `fillRect()` |
+| Method | `fillText()` |
+| Method | `lineTo()` |
+| Method | `moveTo()` |
+| Method | `putImageData()` |
+| Method | `quadraticCurveTo()` |
+| Method | `rect()` |
+| Method | `reset()` |
+| Method | `removeHitRegion()` |
+| Method | `resetTransform()` |
+| Method | `restore()` |
+| Method | `rotate()` |
+| Method | `roundRect()` |
+| Method | `save()` |
+| Method | `scale()` |
+| Method | `scrollPathIntoView()` |
+| Method | `setLineDash()` |
+| Method | `setTransform()` |
+| Method | `stroke()` |
+| Method | `strokeRect()` |
+| Method | `strokeText()` |
+| Method | `transform()` |
+| Method | `translate()` |
+| Writable property | `direction` |
+| Writable property | `fillStyle` |
+| Writable property | `filter` |
+| Writable property | `font` |
+| Writable property | `fontKerning` |
+| Writable property | `fontStretch` |
+| Writable property | `fontVariantCaps` |
+| Writable property | `globalAlpha` |
+| Writable property | `globalCompositeOperation` |
+| Writable property | `imageSmoothingEnabled` |
+| Writable property | `imageSmoothingQuality` |
+| Writable property | `letterSpacing` |
+| Writable property | `lineCap` |
+| Writable property | `lineDashOffset` |
+| Writable property | `lineJoin` |
+| Writable property | `lineWidth` |
+| Writable property | `miterLimit` |
+| Writable property | `shadowBlur` |
+| Writable property | `shadowColor` |
+| Writable property | `shadowOffsetX` |
+| Writable property | `shadowOffsetY` |
+| Writable property | `strokeStyle` |
+| Writable property | `textAlign` |
+| Writable property | `textBaseline` |
+| Writable property | `textRendering` |
+| Writable property | `wordSpacing` |
 
 ## Limitations
 

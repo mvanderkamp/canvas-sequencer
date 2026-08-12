@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Fixed
 - Removed unsupported direct script-tag usage of the CommonJS distribution
   bundle from the README.
+- Clarified the allowlisted `CanvasRenderingContext2D` instruction support in
+  the README.
 
 ## [3.1.1] - 2026-08-02
 ### Added

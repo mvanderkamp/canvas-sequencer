@@ -11,25 +11,41 @@ const CanvasAtom = require('../src/CanvasAtom.js');
 
 describe('CanvasSequence', () => {
   describe('constructor()', () => {
-    test('Returns an object of the correct type', () => {
+    test('creates a CanvasSequence', () => {
+      // When
       const cs = new CanvasSequence();
+
+      // Then
       expect(cs).toBeInstanceOf(CanvasSequence);
     });
   });
 
   describe('Instruction types', () => {
     describe(CanvasAtom.METHOD, () => {
-      const cs = new CanvasSequence();
-      const seq = Object.getOwnPropertySymbols(cs)[0];
-      test('Can have methods pushed into its sequence', () => {
-        expect(() => cs.arc(0, 1, 2, 3, Math.PI)).not.toThrow();
+      test('records a method call', () => {
+        // Given
+        const cs = new CanvasSequence();
+        const seq = Symbol.for('sequence');
+
+        // When
+        cs.arc(0, 1, 2, 3, Math.PI);
+
+        // Then
         expect(cs[seq][0].type).toBe(CanvasAtom.METHOD);
         expect(cs[seq][0].inst).toBe('arc');
         expect(cs[seq][0].args).toEqual([0, 1, 2, 3, Math.PI]);
       });
 
-      test('Additional methods get pushed to end of sequence', () => {
-        expect(() => cs.save()).not.toThrow();
+      test('appends a method after existing instructions', () => {
+        // Given
+        const cs = new CanvasSequence();
+        const seq = Symbol.for('sequence');
+        cs.arc(0, 1, 2, 3, Math.PI);
+
+        // When
+        cs.save();
+
+        // Then
         expect(cs[seq][1].type).toBe(CanvasAtom.METHOD);
         expect(cs[seq][1].inst).toBe('save');
         expect(cs[seq][1].args).toEqual([]);
@@ -37,70 +53,94 @@ describe('CanvasSequence', () => {
     });
 
     describe(CanvasAtom.PROPERTY, () => {
-      const cs = new CanvasSequence();
-      const seq = Object.getOwnPropertySymbols(cs)[0];
-      test('Can have properties pushed into its sequence', () => {
-        expect(() => {
-          cs.lineJoin = 'bevel';
-        }).not.toThrow();
+      test('records a property assignment', () => {
+        // Given
+        const cs = new CanvasSequence();
+        const seq = Symbol.for('sequence');
+
+        // When
+        cs.lineJoin = 'bevel';
+
+        // Then
         expect(cs[seq][0].type).toBe(CanvasAtom.PROPERTY);
         expect(cs[seq][0].inst).toBe('lineJoin');
         expect(cs[seq][0].args).toEqual(['bevel']);
       });
 
-      test('Additional properties get pushed to end of sequence', () => {
-        expect(() => {
-          cs.strokeStyle = 'blue';
-        }).not.toThrow();
+      test('appends a property after existing instructions', () => {
+        // Given
+        const cs = new CanvasSequence();
+        const seq = Symbol.for('sequence');
+        cs.lineJoin = 'bevel';
+
+        // When
+        cs.strokeStyle = 'blue';
+
+        // Then
         expect(cs[seq][1].type).toBe(CanvasAtom.PROPERTY);
         expect(cs[seq][1].inst).toBe('strokeStyle');
         expect(cs[seq][1].args).toEqual(['blue']);
       });
 
-      test('Attempting to "get" a property throws an error', () => {
+      test('throws when reading a property', () => {
+        // Given
+        const cs = new CanvasSequence();
+
+        // Then
         expect(() => cs.strokeStyle).toThrow();
       });
     });
   });
 
   describe('execute(context)', () => {
-    const cs = new CanvasSequence();
-    const ctx = {};
-    ctx.arc = jest.fn();
-    ctx.lineJoin = 'round';
-    ctx.strokeStyle = 'red';
-    ctx.save = jest.fn();
-    ctx.restore = jest.fn();
-    cs.arc(0, 1, 2, 3, Math.PI);
-    cs.lineJoin = 'bevel';
-    cs.strokeStyle = 'blue';
-    cs.strokeStyle = 'green';
+    test('executes instructions in order', () => {
+      // Given
+      const cs = new CanvasSequence();
+      const ctx = {
+        'arc': jest.fn(),
+        'lineJoin': 'round',
+        'strokeStyle': 'red',
+        'save': jest.fn(),
+        'restore': jest.fn(),
+      };
+      cs.arc(0, 1, 2, 3, Math.PI);
+      cs.lineJoin = 'bevel';
+      cs.strokeStyle = 'blue';
+      cs.strokeStyle = 'green';
 
-    test('Executes sequence in order', () => {
-      expect(() => cs.execute(ctx)).not.toThrow();
+      // When
+      cs.execute(ctx);
+
+      // Then
       expect(ctx.arc).toHaveBeenCalledTimes(1);
       expect(ctx.arc).toHaveBeenCalledWith(0, 1, 2, 3, Math.PI);
       expect(ctx.lineJoin).toBe('bevel');
       expect(ctx.strokeStyle).toBe('green');
     });
+
+    test('throws when the context cannot save the canvas state', () => {
+      // Given
+      const sequence = new CanvasSequence();
+
+      // Then
+      expect(() => sequence.execute({})).toThrow(TypeError);
+    });
   });
 
   describe('toJSON()', () => {
-    const cs = new CanvasSequence();
-    cs.fillStyle = 'blue';
-    cs.fillRect(5, 6, 7, 8);
+    test('produces JSON-serializable data', () => {
+      // Given
+      const cs = new CanvasSequence();
+      cs.fillStyle = 'blue';
+      cs.fillRect(5, 6, 7, 8);
 
-    test('Produces a JSON serializable object', () => {
+      // When
       const data = cs.toJSON();
-      let fromjson = null;
-      let tojson = null;
+
+      // Then
       expect(typeof data).toBe('object');
-      expect(() => {
-        tojson = JSON.stringify(data);
-      }).not.toThrow();
-      expect(() => {
-        fromjson = JSON.parse(tojson);
-      }).not.toThrow();
+      const tojson = JSON.stringify(data);
+      const fromjson = JSON.parse(tojson);
       expect(typeof fromjson).toBe('object');
       expect(fromjson.sequence).toBeInstanceOf(Array);
     });
@@ -110,21 +150,39 @@ describe('CanvasSequence', () => {
     const fromJSON = Symbol.for('fromJSON');
     const sequence = Symbol.for('sequence');
 
-    const cs = new CanvasSequence();
-    cs.fillStyle = 'blue';
-    cs.fillRect(5, 6, 7, 8);
-    const data = cs.toJSON();
-
-    test('Reproduces the original sequence', () => {
+    test('reproduces the original sequence', () => {
+      // Given
+      const cs = new CanvasSequence();
+      cs.fillStyle = 'blue';
+      cs.fillRect(5, 6, 7, 8);
+      const data = cs.toJSON();
       const seq = new CanvasSequence();
+
+      // When
       seq[fromJSON](data);
+
+      // Then
       expect(seq).toEqual(cs);
     });
 
-    test('Does nothing if no data provided', () => {
+    test('leaves the sequence empty when no data is provided', () => {
+      // Given
       const seq = new CanvasSequence();
+
+      // When
       seq[fromJSON]();
+
+      // Then
       expect(seq[sequence]).toHaveLength(0);
+    });
+
+    test('rejects malformed data without a sequence array', () => {
+      // Given
+      const seq = new CanvasSequence();
+
+      // Then
+      expect(() => seq[fromJSON]({})).toThrow(TypeError);
+      expect(() => seq[fromJSON]({ 'sequence': null })).toThrow(TypeError);
     });
   });
 });
