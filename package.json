@@ -5,11 +5,19 @@
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "source": "index.js",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "files": [
     "dist/index.js",
     "index.js",
-    "src/"
+    "src/",
+    "index.d.ts"
   ],
+  "targets": {
+    "types": false,
+    "main": {
+      "optimize": true
+    }
+  },
   "directories": {
     "test": "tests"
   },
@@ -45,11 +53,6 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
-  },
-  "targets": {
-    "main": {
-      "optimize": true
-    }
   },
   "jest": {
     "testEnvironmentOptions": {
