@@ -53,9 +53,9 @@ For a package release, use the following workflow so you publish from the same s
 4. Merge the pull request into `main`.
 5. Check out the merged `main` commit locally.
 6. Create the release tag locally for that commit, but do not push it yet.
-7. Build the package so `dist/index.js` and `dist/index.mjs` exist in the publishable working tree.
+7. Build the package so `dist/index.js` exists in the publishable working tree.
 8. Check what will be published with `npm pack --dry-run`.
-9. Sanity-check the built bundles in `dist/index.js` and `dist/index.mjs`.
+9. Sanity-check the built bundle in `dist/index.js` and the ESM entry point in `index.mjs`.
 10. Publish the package to npm from the tagged commit.
 11. Push the tag.
 12. Create the GitHub release from the pushed tag.
@@ -73,7 +73,7 @@ git pull --ff-only origin main
 git tag --annotate v3.1.1 --message "Release 3.1.1"
 npm run build
 npm pack --dry-run
-ls -lh dist/index.js dist/index.mjs
+ls -lh dist/index.js index.mjs
 npm publish
 git push origin v3.1.1
 gh release create v3.1.1 --title "v3.1.1"
