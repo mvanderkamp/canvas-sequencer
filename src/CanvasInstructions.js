@@ -1,0 +1,78 @@
+/*
+ * Author: Michael van der Kamp
+ *
+ * This file defines the CanvasRenderingContext2D instructions supported by
+ * CanvasSequence.
+ */
+
+'use strict';
+
+module.exports = Object.freeze({
+  'METHODS': Object.freeze([
+    'addHitRegion',
+    'arc',
+    'arcTo',
+    'beginPath',
+    'bezierCurveTo',
+    'clearHitRegions',
+    'clearRect',
+    'clip',
+    'closePath',
+    'drawFocusIfNeeded',
+    'drawImage',
+    'ellipse',
+    'fill',
+    'fillRect',
+    'fillText',
+    'lineTo',
+    'moveTo',
+    'putImageData',
+    'quadraticCurveTo',
+    'rect',
+    'reset',
+    'removeHitRegion',
+    'resetTransform',
+    'restore',
+    'rotate',
+    'roundRect',
+    'save',
+    'scale',
+    'scrollPathIntoView',
+    'setLineDash',
+    'setTransform',
+    'stroke',
+    'strokeRect',
+    'strokeText',
+    'transform',
+    'translate',
+  ]),
+
+  'PROPERTIES': Object.freeze([
+    'direction',
+    'fillStyle',
+    'filter',
+    'font',
+    'fontKerning',
+    'fontStretch',
+    'fontVariantCaps',
+    'globalAlpha',
+    'globalCompositeOperation',
+    'imageSmoothingEnabled',
+    'imageSmoothingQuality',
+    'letterSpacing',
+    'lineCap',
+    'lineDashOffset',
+    'lineJoin',
+    'lineWidth',
+    'miterLimit',
+    'shadowBlur',
+    'shadowColor',
+    'shadowOffsetX',
+    'shadowOffsetY',
+    'strokeStyle',
+    'textAlign',
+    'textBaseline',
+    'textRendering',
+    'wordSpacing',
+  ]),
+});

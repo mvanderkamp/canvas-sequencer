@@ -5,17 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.1.2] - 2026-08-11
+### Added
+- Added the MIT license to the project.
+
+### Changed
+- Updated ESLint, Jest, and Parcel development dependencies.
+- Simplified the internal organization of supported canvas instructions and
+  improved test isolation.
+
+### Fixed
+- Corrected the npm homepage URL.
+- Removed unsupported direct script-tag usage of the CommonJS distribution
+  bundle from the README.
+- Clarified the allowlisted `CanvasRenderingContext2D` instruction support in
+  the README.
+
+## [3.1.1] - 2026-08-02
 ### Added
 - CHANGELOG.md to track notable changes.
+- CONTRIBUTING.md with development, pull request, and release instructions.
 
 ### Changed
 - Updated dependencies and workflows.
-- Bumped `coveralls-next` to 6.0.1.
 - Restricted test workflow permissions to read-only.
 - Eliminated duplication in the npm package by specifying exact files to include.
 - Bumped `eslint` from 9.32.0 to 10.0.3 and introduced `@stylistic/eslint-plugin` for stylistic rules.
-- Dropped Node.js 20.x and added Node.js 25.x to the CI test matrix.
+- Refreshed the CI test matrix to Node.js 22.x, 24.x, and 26.x.
 - Bumped `actions/checkout` and `actions/setup-node` GitHub Actions to v6.
+
+### Security
+- Pinned `coverallsapp/github-action` to a specific commit SHA.
+- Disabled credential persistence for `actions/checkout` in the Node.js workflow jobs.
 
 ## [3.1.0] - 2024-11-20
 ### Changed

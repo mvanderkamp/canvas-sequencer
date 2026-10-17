@@ -7,76 +7,7 @@
 'use strict';
 
 const CanvasAtom = require('./CanvasAtom.js');
-
-const locals = Object.freeze({
-  'METHODS': [
-    'addHitRegion',
-    'arc',
-    'arcTo',
-    'beginPath',
-    'bezierCurveTo',
-    'clearHitRegions',
-    'clearRect',
-    'clip',
-    'closePath',
-    'drawFocusIfNeeded',
-    'drawImage',
-    'ellipse',
-    'fill',
-    'fillRect',
-    'fillText',
-    'lineTo',
-    'moveTo',
-    'putImageData',
-    'quadraticCurveTo',
-    'rect',
-    'reset',
-    'removeHitRegion',
-    'resetTransform',
-    'restore',
-    'rotate',
-    'roundRect',
-    'save',
-    'scale',
-    'scrollPathIntoView',
-    'setLineDash',
-    'setTransform',
-    'stroke',
-    'strokeRect',
-    'strokeText',
-    'transform',
-    'translate',
-  ],
-
-  'PROPERTIES': [
-    'direction',
-    'fillStyle',
-    'filter',
-    'font',
-    'fontKerning',
-    'fontStretch',
-    'fontVariantCaps',
-    'globalAlpha',
-    'globalCompositeOperation',
-    'imageSmoothingEnabled',
-    'imageSmoothingQuality',
-    'letterSpacing',
-    'lineCap',
-    'lineDashOffset',
-    'lineJoin',
-    'lineWidth',
-    'miterLimit',
-    'shadowBlur',
-    'shadowColor',
-    'shadowOffsetX',
-    'shadowOffsetY',
-    'strokeStyle',
-    'textAlign',
-    'textBaseline',
-    'textRendering',
-    'wordSpacing',
-  ],
-});
+const instructions = require('./CanvasInstructions.js');
 
 // Mark properties as intended for internal use.
 const symbols = Object.freeze({
@@ -154,7 +85,7 @@ class CanvasSequence {
   }
 }
 
-locals.METHODS.forEach((m) => {
+instructions.METHODS.forEach((m) => {
   Object.defineProperty(CanvasSequence.prototype, m, {
     'value': function pushMethodCall(...args) {
       this[symbols.push](CanvasAtom.METHOD, m, args);
@@ -165,7 +96,7 @@ locals.METHODS.forEach((m) => {
   });
 });
 
-locals.PROPERTIES.forEach((p) => {
+instructions.PROPERTIES.forEach((p) => {
   Object.defineProperty(CanvasSequence.prototype, p, {
     get() { throw `Invalid canvas sequencer interaction, cannot get ${p}.`; },
     set(v) { this[symbols.push](CanvasAtom.PROPERTY, p, [v]); },

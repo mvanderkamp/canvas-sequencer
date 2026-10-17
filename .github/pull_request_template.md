@@ -1,9 +1,6 @@
 ## Description
 Briefly describe the changes introduced by this PR.
 
-## Related Issues
-Fixes # (issue number)
-
 ## Type of Change
 - [ ] 🐛 Bug fix (non-breaking change fixing an issue)
 - [ ] ✨ New feature (non-breaking change adding functionality)

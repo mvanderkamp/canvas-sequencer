@@ -11,62 +11,101 @@ const CanvasSequence = require('../src/CanvasSequence.js');
 
 describe('CanvasBlueprint', () => {
   describe('constructor()', () => {
-    test('Constructs a blueprint', () => {
-      expect(() => new CanvasBlueprint()).not.toThrow();
-      expect(new CanvasBlueprint()).toBeInstanceOf(CanvasBlueprint);
+    test('creates a CanvasBlueprint', () => {
+      // When
+      const blueprint = new CanvasBlueprint();
+
+      // Then
+      expect(blueprint).toBeInstanceOf(CanvasBlueprint);
     });
   });
 
   describe('execute()', () => {
-    test('Throws an exception, blueprints cannot be executed!', () => {
-      expect(() => new CanvasBlueprint().execute()).toThrow();
+    test('throws because blueprints cannot be executed', () => {
+      // Given
+      const blueprint = new CanvasBlueprint();
+
+      // Then
+      expect(() => blueprint.execute()).toThrow();
     });
   });
 
   describe('sequencing', () => {
-    test('Can define sequences on the blueprint', () => {
+    test('records tagged and untagged instructions', () => {
+      // Given
       const bp = new CanvasBlueprint();
-      expect(() => {
-        bp.lineWidth = 2;
-        bp.moveTo(42, 70);
-        bp.fillText('{{x}}', 5, 6);
-        bp.fillText('y', 7, 8);
-        bp.fillRect('{x}', '{y}', 30, 40);
-      }).not.toThrow();
+
+      // When
+      bp.lineWidth = 2;
+      bp.moveTo(42, 70);
+      bp.fillText('{{x}}', 5, 6);
+      bp.fillText('y', 7, 8);
+      bp.fillRect('{x}', '{y}', 30, 40);
+
+      // Then
+      expect(bp.toJSON().sequence).toHaveLength(5);
     });
   });
 
   describe('build(values)', () => {
-    const bp = new CanvasBlueprint();
-    bp.lineWidth = 2;
-    bp.moveTo(42, 70);
-    bp.fillText('{{x}}', 5, 6);
-    bp.strokeText('y', 7, 8);
-    bp.fillRect('{x}', '{y}', 30, 40);
-    bp.font = '2.5em monospace';
-    bp.lineWidth = 8;
+    function createBlueprint() {
+      const bp = new CanvasBlueprint();
+      bp.lineWidth = 2;
+      bp.moveTo(42, 70);
+      bp.fillText('{{x}}', 5, 6);
+      bp.strokeText('y', 7, 8);
+      bp.fillRect('{x}', '{y}', 30, 40);
+      bp.font = '2.5em monospace';
+      bp.lineWidth = 8;
+      return bp;
+    }
 
-    const values = { 'x': 250, 'y': 99 };
-    const ctx = {
-      'save': jest.fn(),
-      'restore': jest.fn(),
-      'fillRect': jest.fn(),
-      'moveTo': jest.fn(),
-      'lineWidth': 1,
-      'font': '16px serif',
-      'fillText': jest.fn(),
-      'strokeText': jest.fn(),
-    };
+    function createContext() {
+      return {
+        'save': jest.fn(),
+        'restore': jest.fn(),
+        'fillRect': jest.fn(),
+        'moveTo': jest.fn(),
+        'lineWidth': 1,
+        'font': '16px serif',
+        'fillText': jest.fn(),
+        'strokeText': jest.fn(),
+      };
+    }
 
-    test('Produces a CanvasSequence', () => {
-      expect(bp.build()).toBeInstanceOf(CanvasSequence);
+    test('builds a CanvasSequence', () => {
+      // Given
+      const blueprint = createBlueprint();
+
+      // When
+      const sequence = blueprint.build();
+
+      // Then
+      expect(sequence).toBeInstanceOf(CanvasSequence);
     });
 
-    test('Produced CanvasSequence can be executed', () => {
-      expect(() => bp.build(values).execute(ctx)).not.toThrow();
+    test('builds an executable CanvasSequence', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      const sequence = blueprint.build({ 'x': 250, 'y': 99 });
+      sequence.execute(ctx);
+
+      // Then
+      expect(ctx.restore).toHaveBeenCalledTimes(1);
     });
 
-    test('Instructions are executed in the correct sequence', () => {
+    test('executes instructions in sequence', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      blueprint.build({ 'x': 250, 'y': 99 }).execute(ctx);
+
+      // Then
       expect(ctx.lineWidth).toBe(8);
       expect(ctx.moveTo).toHaveBeenCalledTimes(1);
       expect(ctx.fillText).toHaveBeenCalledTimes(1);
@@ -75,63 +114,126 @@ describe('CanvasBlueprint', () => {
       expect(ctx.font).toBe('2.5em monospace');
     });
 
-    test('Non-string arguments are passed through', () => {
+    test('passes non-string arguments through', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      blueprint.build({ 'x': 250, 'y': 99 }).execute(ctx);
+
+      // Then
       expect(ctx.moveTo).toHaveBeenLastCalledWith(42, 70);
     });
 
-    test('Plain string arguments are passed through', () => {
+    test('passes plain string arguments through', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      blueprint.build({ 'x': 250, 'y': 99 }).execute(ctx);
+
+      // Then
       expect(ctx.strokeText).toHaveBeenLastCalledWith('y', 7, 8);
     });
 
-    test('Double tag markers at start or end are reduced to single', () => {
+    test('reduces escaped tag markers to a single marker', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      blueprint.build({ 'x': 250, 'y': 99 }).execute(ctx);
+
+      // Then
       expect(ctx.fillText).toHaveBeenLastCalledWith('{x}', 5, 6);
     });
 
-    test('Tags are replaced with values passed to build()', () => {
+    test('replaces tags with values passed to build', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const values = { 'x': 250, 'y': 99 };
+      const ctx = createContext();
+
+      // When
+      blueprint.build(values).execute(ctx);
+
+      // Then
       expect(ctx.fillRect).toHaveBeenLastCalledWith(values.x, values.y, 30, 40);
     });
 
-    test('Can be rebuilt correctly', () => {
+    test('can be rebuilt with different values', () => {
+      // Given
+      const blueprint = createBlueprint();
       const values = { 'x': 101, 'y': 42 };
-      expect(() => bp.build(values).execute(ctx)).not.toThrow();
+      const ctx = createContext();
+
+      // When
+      blueprint.build(values).execute(ctx);
+
+      // Then
       expect(ctx.fillRect).toHaveBeenLastCalledWith(values.x, values.y, 30, 40);
+    });
+
+    test('removes markers from tags with missing values', () => {
+      // Given
+      const blueprint = createBlueprint();
+      const ctx = createContext();
+
+      // When
+      blueprint.build().execute(ctx);
+
+      // Then
+      expect(ctx.fillRect).toHaveBeenLastCalledWith('x', 'y', 30, 40);
     });
   });
 
   describe('toJSON()', () => {
-    const bp = new CanvasBlueprint();
-    bp.fillStyle = 'blue';
-    bp.fillRect(5, '{y}', 7, 8);
+    test('produces JSON-serializable data', () => {
+      // Given
+      const bp = new CanvasBlueprint();
+      bp.fillStyle = 'blue';
+      bp.fillRect(5, '{y}', 7, 8);
 
-    test('Produces a JSON serializable object', () => {
+      // When
       const data = bp.toJSON();
-      let fromjson = null;
-      let tojson = null;
+
+      // Then
       expect(typeof data).toBe('object');
-      expect(() => {
-        tojson = JSON.stringify(data);
-      }).not.toThrow();
-      expect(() => {
-        fromjson = JSON.parse(tojson);
-      }).not.toThrow();
+      const tojson = JSON.stringify(data);
+      const fromjson = JSON.parse(tojson);
       expect(typeof fromjson).toBe('object');
       expect(fromjson.sequence).toBeInstanceOf(Array);
     });
   });
 
   describe('[symbols.fromJSON](data)', () => {
-    const bp = new CanvasBlueprint();
-    bp.fillStyle = 'blue';
-    bp.fillRect(5, '{y}', 7, 8);
-    const data = bp.toJSON();
+    test('revives a CanvasBlueprint object', () => {
+      // Given
+      const bp = new CanvasBlueprint();
+      bp.fillStyle = 'blue';
+      bp.fillRect(5, '{y}', 7, 8);
+      const data = bp.toJSON();
 
-    test('Produces a CanvasBlueprint object', () => {
+      // When
       const seq = new CanvasBlueprint(data);
+
+      // Then
       expect(seq).toBeInstanceOf(CanvasBlueprint);
     });
 
-    test('Reproduces the original sequence', () => {
+    test('reproduces the original sequence', () => {
+      // Given
+      const bp = new CanvasBlueprint();
+      bp.fillStyle = 'blue';
+      bp.fillRect(5, '{y}', 7, 8);
+      const data = bp.toJSON();
+
+      // When
       const seq = new CanvasBlueprint(data);
+
+      // Then
       expect(seq).toEqual(bp);
     });
   });
