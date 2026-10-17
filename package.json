@@ -5,8 +5,16 @@
   "author": "Michael van der Kamp <michael.vanderkamp@usask.ca>",
   "source": "index.js",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist/index.js",
+    "dist/index.mjs",
     "index.js",
     "src/"
   ],
@@ -49,6 +57,10 @@
   "targets": {
     "main": {
       "optimize": true
+    },
+    "module": {
+      "optimize": true,
+      "outputFormat": "esmodule"
     }
   },
   "jest": {
