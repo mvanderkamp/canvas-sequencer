@@ -51,6 +51,12 @@ Server side, or in a Node environment.
 const { CanvasSequence, CanvasBlueprint } = require('canvas-sequencer');
 ```
 
+For ES modules:
+
+```javascript
+import { CanvasSequence, CanvasBlueprint } from 'canvas-sequencer';
+```
+
 ## CanvasSequence API
 
 ### Creating a sequence
