@@ -13,8 +13,19 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./package.json": "./package.json",
+    "./dist/index": "./dist/index.js",
+    "./dist/index.js": "./dist/index.js",
+    "./index": "./index.js",
     "./index.js": "./index.js",
-    "./src/*": "./src/*"
+    "./src/CanvasAtom": "./src/CanvasAtom.js",
+    "./src/CanvasAtom.js": "./src/CanvasAtom.js",
+    "./src/CanvasBlueprint": "./src/CanvasBlueprint.js",
+    "./src/CanvasBlueprint.js": "./src/CanvasBlueprint.js",
+    "./src/CanvasInstructions": "./src/CanvasInstructions.js",
+    "./src/CanvasInstructions.js": "./src/CanvasInstructions.js",
+    "./src/CanvasSequence": "./src/CanvasSequence.js",
+    "./src/CanvasSequence.js": "./src/CanvasSequence.js"
   },
   "files": [
     "dist/index.js",
@@ -62,6 +73,7 @@
     "lint": "eslint index.js src tests",
     "lint:fix": "eslint index.js src tests --fix",
     "test": "jest",
+    "test:types": "tsc --noEmit --strict --module Node16 --moduleResolution Node16 --target ES2022 --lib ES2022,DOM tests/types/consumer.ts",
     "test:coverage": "jest --coverage",
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
   },
@@ -79,6 +91,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "eslint": "^10.8.1",
     "jest": "^30.4.2",
-    "parcel": "^2.16.4"
+    "parcel": "^2.16.4",
+    "typescript": "^5.9.3"
   }
 }
