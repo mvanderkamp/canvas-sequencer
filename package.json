@@ -6,8 +6,10 @@
   "source": "src/entry.mjs",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
@@ -18,8 +20,15 @@
     "dist/index.js",
     "dist/index.mjs",
     "index.js",
-    "src/"
+    "src/",
+    "index.d.ts"
   ],
+  "targets": {
+    "types": false,
+    "main": {
+      "optimize": true
+    }
+  },
   "directories": {
     "test": "tests"
   },
@@ -55,11 +64,6 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:debug": "node inspect $(npm bin)/jest --runInBand"
-  },
-  "targets": {
-    "main": {
-      "optimize": true
-    }
   },
   "jest": {
     "testEnvironmentOptions": {
