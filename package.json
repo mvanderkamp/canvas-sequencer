@@ -19,14 +19,9 @@
     "./dist/index.js": "./dist/index.js",
     "./index": "./index.js",
     "./index.js": "./index.js",
-    "./src/CanvasAtom": "./src/CanvasAtom.js",
-    "./src/CanvasAtom.js": "./src/CanvasAtom.js",
-    "./src/CanvasBlueprint": "./src/CanvasBlueprint.js",
-    "./src/CanvasBlueprint.js": "./src/CanvasBlueprint.js",
-    "./src/CanvasInstructions": "./src/CanvasInstructions.js",
-    "./src/CanvasInstructions.js": "./src/CanvasInstructions.js",
-    "./src/CanvasSequence": "./src/CanvasSequence.js",
-    "./src/CanvasSequence.js": "./src/CanvasSequence.js"
+    "./src/*.js": "./src/*.js",
+    "./src/*.mjs": "./src/*.mjs",
+    "./src/*": "./src/*.js"
   },
   "files": [
     "dist/index.js",
