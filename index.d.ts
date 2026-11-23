@@ -92,3 +92,10 @@ export class CanvasBlueprint extends CanvasSequence {
   build(values?: Record<string, unknown>): CanvasSequence;
   execute(): never;
 }
+
+declare const canvasSequencer: {
+  CanvasSequence: typeof CanvasSequence;
+  CanvasBlueprint: typeof CanvasBlueprint;
+};
+
+export default canvasSequencer;

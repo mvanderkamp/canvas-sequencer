@@ -17,6 +17,7 @@ test('legacy package subpaths remain available', () => {
   expect(require('canvas-sequencer/package.json').name).toBe('canvas-sequencer');
   expect(require('canvas-sequencer/index')).toEqual(require('../index.js'));
   expect(require('canvas-sequencer/index.js')).toEqual(require('../index.js'));
+  expect(require('canvas-sequencer/dist')).toEqual(require('../dist'));
   expect(require('canvas-sequencer/dist/index')).toEqual(require('../dist'));
   expect(require('canvas-sequencer/dist/index.js')).toEqual(require('../dist'));
 
@@ -35,7 +36,7 @@ test('legacy package subpaths remain available', () => {
   }
 });
 
-test('ESM entry exports the named API without a default export', () => {
+test('ESM entry exports named and default APIs', () => {
   const { execFileSync } = require('node:child_process');
   const path = require('node:path');
 
@@ -43,7 +44,8 @@ test('ESM entry exports the named API without a default export', () => {
     'import * as api from \'canvas-sequencer\';',
     'if (typeof api.CanvasSequence !== \'function\') process.exit(1);',
     'if (typeof api.CanvasBlueprint !== \'function\') process.exit(1);',
-    'if (\'default\' in api) process.exit(1);',
+    'if (api.default.CanvasSequence !== api.CanvasSequence) process.exit(1);',
+    'if (api.default.CanvasBlueprint !== api.CanvasBlueprint) process.exit(1);',
   ].join('\n');
 
   expect(
